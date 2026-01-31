@@ -27,6 +27,9 @@
                     },
                     backgroundImage: {
                         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
                     }
                 }
             }
@@ -89,11 +92,11 @@
             <div class="flex justify-end h-20 items-center">
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-1">
-                        <a href="#about" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all">About</a>
-                        <a href="#experience" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all">Experience</a>
-                        <a href="#projects" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all">Projects</a>
-                        <a href="#publications" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all">Publications</a>
-                        <a href="#contact" class="ml-4 bg-white/10 border border-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full text-sm font-medium transition-all backdrop-blur-md">Contact</a>
+                        <a href="#about" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">About</a>
+                        <a href="#experience" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Experience</a>
+                        <a href="#projects" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Projects</a>
+                        <a href="#publications" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Publications</a>
+                        <a href="#contact" class="ml-4 bg-white/10 border border-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full text-sm font-medium transition-all backdrop-blur-md active:scale-95 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">Contact</a>
                     </div>
                 </div>
                 <!-- Mobile menu button -->
@@ -140,18 +143,18 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all border-white/10 hover:border-white/20">
+                        <a href="#contact" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-medium rounded-full text-white bg-white/10 hover:bg-white/20 backdrop-blur-sm transition-all border-white/10 hover:border-white/20 active:scale-95 shadow-lg hover:shadow-primary/20">
                             Get in touch
                         </a>
-                        <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 border border-white/5 text-base font-medium rounded-full text-textMuted hover:text-white hover:bg-white/5 transition-all">
+                        <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 border border-white/5 text-base font-medium rounded-full text-textMuted hover:text-white hover:bg-white/5 transition-all active:scale-95">
                             <i class="fas fa-arrow-down mr-2 text-xs"></i> View Work
                         </a>
                     </div>
                     
                     <div class="mt-10 flex space-x-6 justify-center md:justify-start text-textMuted items-center">
-                        <a href="https://github.com/MayeshMohapatra" target="_blank" class="hover:text-white transition-all hover:scale-110 transform duration-200"><i class="fab fa-github text-2xl"></i></a>
-                        <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="hover:text-blue-400 transition-all hover:scale-110 transform duration-200"><i class="fab fa-linkedin text-2xl"></i></a>
-                        <a href="mailto:mayesh@tamu.edu" class="hover:text-white transition-all hover:scale-110 transform duration-200"><i class="fas fa-envelope text-2xl"></i></a>
+                        <a href="https://github.com/MayeshMohapatra" target="_blank" class="hover:text-white transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fab fa-github text-2xl"></i></a>
+                        <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="hover:text-blue-400 transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fab fa-linkedin text-2xl"></i></a>
+                        <a href="mailto:mayesh@tamu.edu" class="hover:text-white transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fas fa-envelope text-2xl"></i></a>
                         <div class="h-px w-12 bg-white/10 ml-4 hidden md:block"></div>
                     </div>
                 </div>
@@ -179,14 +182,14 @@
                 
                 <div class="space-y-8 relative border-l border-white/10 ml-3 md:ml-6">
                     
-                    <!-- Job 1 -->
+                    <!-- Job 1: TAMU (Primary Blue Theme) -->
                     <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-primary shadow-[0_0_10px_rgba(59,130,246,0.8)]"></div>
-                        <div class="bg-surface/50 border border-white/5 p-6 rounded-2xl hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
+                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-primary group-hover:border-primary group-hover:shadow-[0_0_12px_rgba(59,130,246,0.6)]"></div>
+                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
-                                    <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Graduate Researcher</h3>
-                                    <div class="text-primary text-sm font-medium mt-1">Texas A&M University</div>
+                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-primary">Graduate Researcher</h3>
+                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Texas A&M University</div>
                                 </div>
                                 <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Oct 2025 - Present</span>
                             </div>
@@ -207,14 +210,14 @@
                         </div>
                     </div>
 
-                    <!-- Job 2 -->
+                    <!-- Job 2: IISc (Accent Cyan Theme) -->
                     <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 group-hover:border-accent transition-colors"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl hover:bg-surfaceHighlight/30 hover:border-white/10 transition-all duration-300">
+                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-accent group-hover:border-accent group-hover:shadow-[0_0_12px_rgba(6,182,212,0.6)]"></div>
+                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
-                                    <h3 class="text-xl font-bold text-textMain group-hover:text-white transition-colors">Project Associate</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1">Indian Institute of Science (IISc)</div>
+                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-accent">Project Associate</h3>
+                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Indian Institute of Science (IISc)</div>
                                 </div>
                                 <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">May 2023 - May 2025</span>
                             </div>
@@ -235,14 +238,14 @@
                         </div>
                     </div>
 
-                    <!-- Job 3: Deloitte (Added) -->
+                    <!-- Job 3: Deloitte (Green Theme) -->
                     <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 group-hover:border-green-500 transition-colors"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl hover:bg-surfaceHighlight/30 hover:border-white/10 transition-all duration-300">
+                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-green-500 group-hover:border-green-500 group-hover:shadow-[0_0_12px_rgba(34,197,94,0.6)]"></div>
+                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
-                                    <h3 class="text-xl font-bold text-textMain group-hover:text-white transition-colors">Data Science Intern</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1">Deloitte Haskins and Sells LLP</div>
+                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-green-400">Data Science Intern</h3>
+                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Deloitte Haskins and Sells LLP</div>
                                 </div>
                                 <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Jun 2022 - Mar 2023</span>
                             </div>
@@ -263,14 +266,14 @@
                         </div>
                     </div>
 
-                    <!-- Job 4: Georgia Tech -->
+                    <!-- Job 4: Georgia Tech (Purple Theme) -->
                     <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 group-hover:border-purple-500 transition-colors"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl hover:bg-surfaceHighlight/30 hover:border-white/10 transition-all duration-300">
+                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-purple-500 group-hover:border-purple-500 group-hover:shadow-[0_0_12px_rgba(168,85,247,0.6)]"></div>
+                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
                             <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                                 <div>
-                                    <h3 class="text-xl font-bold text-textMain group-hover:text-white transition-colors">Research Intern</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1">Georgia Institute of Technology</div>
+                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-purple-400">Research Intern</h3>
+                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Georgia Institute of Technology</div>
                                 </div>
                                 <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Jan 2023 - May 2023</span>
                             </div>
@@ -301,10 +304,10 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     
                     <!-- Project 1 -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2">
+                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
                         <div class="h-40 bg-gradient-to-br from-primary/10 to-transparent relative overflow-hidden">
                             <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="javascript:void(0)" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-primary transition-all"><i class="fas fa-external-link-alt text-xs"></i></a>
+                                <a href="https://www.vistalabiisc.com/research/cyc" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-primary transition-all active:scale-95"><i class="fas fa-external-link-alt text-xs"></i></a>
                             </div>
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-satellite text-4xl text-primary/30 group-hover:text-primary/80 transition-all duration-500 transform group-hover:scale-110"></i>
@@ -324,7 +327,7 @@
                     </div>
 
                     <!-- Project 2 -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-500 hover:-translate-y-2">
+                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
                         <div class="h-40 bg-gradient-to-br from-accent/10 to-transparent relative overflow-hidden">
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-cube text-4xl text-accent/30 group-hover:text-accent/80 transition-all duration-500 transform group-hover:scale-110"></i>
@@ -344,10 +347,10 @@
                     </div>
 
                     <!-- Project 3 -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2">
+                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
                         <div class="h-40 bg-gradient-to-br from-purple-500/10 to-transparent relative overflow-hidden">
                             <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="javascript:void(0)" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-purple-500 transition-all"><i class="fab fa-github text-xs"></i></a>
+                                <a href="https://github.com/MayeshMohapatra/Recurrent-Attention-Model-for-Image-Classification" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-purple-500 transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
                             </div>
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-brain text-4xl text-purple-500/30 group-hover:text-purple-500/80 transition-all duration-500 transform group-hover:scale-110"></i>
@@ -379,32 +382,32 @@
                 
                 <div class="space-y-4">
                     <a href="#" class="block group">
-                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all">
+                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
                             <div class="flex items-start justify-between">
                                 <h3 class="text-lg font-medium text-textMain group-hover:text-primary transition-colors">Comparative Analysis of Deep Learning Models for Cyclone Detection</h3>
                                 <i class="fas fa-arrow-right text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all"></i>
                             </div>
-                            <div class="mt-2 text-sm text-textMuted italic">IEEE International Geosciences and Remote Sensing Symposium (IGARSS) 2025</div>
+                            <div class="mt-2 text-sm text-textMuted italic group-hover:text-white/80 transition-colors">IEEE International Geosciences and Remote Sensing Symposium (IGARSS) 2025</div>
                         </div>
                     </a>
 
                     <a href="#" class="block group">
-                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all">
+                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
                             <div class="flex items-start justify-between">
                                 <h3 class="text-lg font-medium text-textMain group-hover:text-primary transition-colors">A Self-Supervised Visual Analytical Approach for Automatic Detection of Cyclonic Events</h3>
                                 <i class="fas fa-arrow-right text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all"></i>
                             </div>
-                            <div class="mt-2 text-sm text-textMuted italic">40th Annual Symposium on Space Science and Technology, ISRO-IISC (2024)</div>
+                            <div class="mt-2 text-sm text-textMuted italic group-hover:text-white/80 transition-colors">40th Annual Symposium on Space Science and Technology, ISRO-IISC (2024)</div>
                         </div>
                     </a>
 
                     <a href="#" class="block group">
-                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all">
+                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
                             <div class="flex items-start justify-between">
                                 <h3 class="text-lg font-medium text-textMain group-hover:text-primary transition-colors">Generative Adversarial Network Based Approach towards Synthetically Generating Insider Threat Scenarios</h3>
                                 <i class="fas fa-arrow-right text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all"></i>
                             </div>
-                            <div class="mt-2 text-sm text-textMuted italic">Journal of Software Engineering and Applications (2023)</div>
+                            <div class="mt-2 text-sm text-textMuted italic group-hover:text-white/80 transition-colors">Journal of Software Engineering and Applications (2023)</div>
                         </div>
                     </a>
                 </div>
@@ -423,23 +426,23 @@
                     <div>
                         <h3 class="text-sm uppercase tracking-widest text-textMuted font-bold mb-6">Languages & Frameworks</h3>
                         <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary transition-all cursor-default">Python</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary transition-all cursor-default">C/C++</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary transition-all cursor-default">PyTorch</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary transition-all cursor-default">TensorFlow</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary transition-all cursor-default">Scikit-Learn</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary transition-all cursor-default">Pandas/NumPy</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">Python</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">C/C++</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">PyTorch</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">TensorFlow</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">Scikit-Learn</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">Pandas/NumPy</span>
                         </div>
                     </div>
 
                     <div>
                         <h3 class="text-sm uppercase tracking-widest text-textMuted font-bold mb-6">Tools & Infrastructure</h3>
                         <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent transition-all cursor-default">AWS</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent transition-all cursor-default">Docker</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent transition-all cursor-default">Spark</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent transition-all cursor-default">CUDA</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent transition-all cursor-default">Git</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">AWS</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Docker</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Spark</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">CUDA</span>
+                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Git</span>
                         </div>
                     </div>
                 </div>
@@ -454,10 +457,10 @@
                     I'm currently based in College Station, TX and always open to discussing new research opportunities in Computer Vision and AI.
                 </p>
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="mailto:mayesh@tamu.edu" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-full text-black bg-white hover:bg-gray-200 transition-all">
+                    <a href="mailto:mayesh@tamu.edu" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-full text-black bg-white hover:bg-gray-200 transition-all active:scale-95">
                         <i class="far fa-envelope mr-2"></i> Email Me
                     </a>
-                    <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border border-white/10 text-base font-bold rounded-full text-white hover:bg-white/5 transition-all">
+                    <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border border-white/10 text-base font-bold rounded-full text-white hover:bg-white/5 transition-all active:scale-95">
                         <i class="fab fa-linkedin mr-2"></i> LinkedIn
                     </a>
                 </div>

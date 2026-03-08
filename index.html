@@ -70,8 +70,7 @@
             width: 100%;
             height: 100%; 
             z-index: -1;
-            /* Gradient fade at the bottom */
-            background: linear-gradient(to bottom, #050505 0%, #000000 100%);
+            background: #050505;
         }
         
         /* Ensure content sits above canvas */
@@ -832,106 +831,136 @@
         document.addEventListener('DOMContentLoaded', typeName);
 
 
-        // --- PARTICLE BACKGROUND ---
-        
+        // --- INTERACTIVE GRID WAVES ---
+
         const canvas = document.getElementById('canvas-container');
         const ctx = canvas.getContext('2d');
-        let particles = [];
 
-        function resize() {
+        // Mouse tracking
+        let mouse = { x: -1000, y: -1000 };
+        document.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+        document.addEventListener('mouseleave', () => {
+            mouse.x = -1000;
+            mouse.y = -1000;
+        });
+
+        // Grid config
+        const SPACING = 40;
+        const DOT_RADIUS = 1.2;
+        const MOUSE_RADIUS = 180;
+        const WAVE_AMPLITUDE = 12;
+        const WAVE_SPEED = 0.0015;
+        const COLOR_BASE = { r: 59, g: 130, b: 246 };   // primary blue
+        const COLOR_ACCENT = { r: 6, g: 182, b: 212 };   // accent cyan
+
+        let cols, rows, gridPoints;
+        let time = 0;
+
+        function initGrid() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-        }
-        
-        window.addEventListener('resize', resize);
-        resize();
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 3 + 1; // Larger atoms
-                this.baseSize = this.size;
-                // Move upwards
-                this.vy = -(Math.random() * 0.5 + 0.2); 
-                this.vx = (Math.random() - 0.5) * 0.5;
-                this.alpha = Math.random() * 0.4 + 0.1;
-            }
-
-            update() {
-                this.x += this.vx;
-                this.y += this.vy;
-
-                // Wrap around (bottom to top) to create endless flow
-                if (this.y < -10) this.y = canvas.height + 10;
-                if (this.x < 0) this.x = canvas.width;
-                if (this.x > canvas.width) this.x = 0;
-                
-                // Pulse effect
-                this.size = this.baseSize + Math.sin(Date.now() * 0.005 + this.x) * 0.5;
-            }
-
-            draw() {
-                ctx.save();
-                ctx.globalAlpha = this.alpha;
-                
-                // Draw Core
-                ctx.fillStyle = "#3b82f6"; // Primary Blue
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-                
-                // Draw Orbit/Glow (Atom effect)
-                ctx.strokeStyle = "rgba(148, 163, 184, 0.2)";
-                ctx.lineWidth = 1;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size * 2, 0, Math.PI * 2);
-                ctx.stroke();
-                
-                ctx.restore();
-            }
-        }
-
-        // Create particles
-        function initParticles() {
-            particles = [];
-            const particleCount = Math.floor(window.innerWidth / 15); // Responsive count
-            for (let i = 0; i < particleCount; i++) {
-                particles.push(new Particle());
-            }
-        }
-        
-        initParticles();
-        window.addEventListener('resize', initParticles);
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-            particles.forEach((p, index) => {
-                p.update();
-                p.draw();
-                
-                // Connect mostly only near particles to form "molecules"
-                for (let j = index + 1; j < particles.length; j++) {
-                    const p2 = particles[j];
-                    const dx = p.x - p2.x;
-                    const dy = p.y - p2.y;
-                    const dist = Math.sqrt(dx * dx + dy * dy);
-
-                    if (dist < 100) {
-                        ctx.beginPath();
-                        ctx.strokeStyle = `rgba(59, 130, 246, ${0.1 * (1 - dist/100)})`;
-                        ctx.lineWidth = 0.5;
-                        ctx.moveTo(p.x, p.y);
-                        ctx.lineTo(p2.x, p2.y);
-                        ctx.stroke();
-                    }
+            cols = Math.ceil(canvas.width / SPACING) + 2;
+            rows = Math.ceil(canvas.height / SPACING) + 2;
+            gridPoints = [];
+            for (let r = 0; r < rows; r++) {
+                for (let c = 0; c < cols; c++) {
+                    gridPoints.push({
+                        baseX: c * SPACING,
+                        baseY: r * SPACING,
+                        x: c * SPACING,
+                        y: r * SPACING,
+                        col: c,
+                        row: r
+                    });
                 }
-            });
-
-            requestAnimationFrame(animate);
+            }
         }
-        animate();
+
+        initGrid();
+        window.addEventListener('resize', initGrid);
+
+        function animateGrid() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            time += WAVE_SPEED;
+
+            for (let i = 0; i < gridPoints.length; i++) {
+                const pt = gridPoints[i];
+
+                // Ambient sine wave displacement
+                const waveX = Math.sin(pt.baseY * 0.02 + time * 2) * WAVE_AMPLITUDE * 0.3;
+                const waveY = Math.cos(pt.baseX * 0.015 + time * 1.5) * WAVE_AMPLITUDE;
+
+                // Mouse repulsion
+                const dx = pt.baseX - mouse.x;
+                const dy = pt.baseY - mouse.y;
+                const dist = Math.sqrt(dx * dx + dy * dy);
+                let pushX = 0, pushY = 0;
+                if (dist < MOUSE_RADIUS) {
+                    const force = (1 - dist / MOUSE_RADIUS);
+                    const angle = Math.atan2(dy, dx);
+                    pushX = Math.cos(angle) * force * 30;
+                    pushY = Math.sin(angle) * force * 30;
+                }
+
+                pt.x = pt.baseX + waveX + pushX;
+                pt.y = pt.baseY + waveY + pushY;
+            }
+
+            // Draw connections (horizontal + vertical lines between neighbors)
+            for (let i = 0; i < gridPoints.length; i++) {
+                const pt = gridPoints[i];
+                const c = pt.col;
+                const r = pt.row;
+
+                // Displacement magnitude drives opacity
+                const dispX = pt.x - pt.baseX;
+                const dispY = pt.y - pt.baseY;
+                const disp = Math.sqrt(dispX * dispX + dispY * dispY);
+                const intensity = Math.min(disp / 30, 1);
+
+                // Lerp color from base blue to accent cyan based on displacement
+                const cr = Math.round(COLOR_BASE.r + (COLOR_ACCENT.r - COLOR_BASE.r) * intensity);
+                const cg = Math.round(COLOR_BASE.g + (COLOR_ACCENT.g - COLOR_BASE.g) * intensity);
+                const cb = Math.round(COLOR_BASE.b + (COLOR_ACCENT.b - COLOR_BASE.b) * intensity);
+
+                const lineAlpha = 0.04 + intensity * 0.12;
+                const dotAlpha = 0.15 + intensity * 0.55;
+
+                // Draw line to right neighbor
+                if (c < cols - 1) {
+                    const right = gridPoints[r * cols + (c + 1)];
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(${cr},${cg},${cb},${lineAlpha})`;
+                    ctx.lineWidth = 0.5 + intensity * 0.5;
+                    ctx.moveTo(pt.x, pt.y);
+                    ctx.lineTo(right.x, right.y);
+                    ctx.stroke();
+                }
+
+                // Draw line to bottom neighbor
+                if (r < rows - 1) {
+                    const below = gridPoints[(r + 1) * cols + c];
+                    ctx.beginPath();
+                    ctx.strokeStyle = `rgba(${cr},${cg},${cb},${lineAlpha})`;
+                    ctx.lineWidth = 0.5 + intensity * 0.5;
+                    ctx.moveTo(pt.x, pt.y);
+                    ctx.lineTo(below.x, below.y);
+                    ctx.stroke();
+                }
+
+                // Draw dot
+                ctx.beginPath();
+                ctx.fillStyle = `rgba(${cr},${cg},${cb},${dotAlpha})`;
+                ctx.arc(pt.x, pt.y, DOT_RADIUS + intensity * 1.5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+
+            requestAnimationFrame(animateGrid);
+        }
+        animateGrid();
 
 
         // --- SMOOTH SCROLL ---

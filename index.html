@@ -365,131 +365,243 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    
-                    <!-- Project 1 -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
-                        <div class="h-40 bg-gradient-to-br from-primary/10 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://www.vistalabiisc.com/research/cyc" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-primary transition-all active:scale-95"><i class="fas fa-external-link-alt text-xs"></i></a>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <i class="fas fa-satellite text-4xl text-primary/30 group-hover:text-primary/80 transition-all duration-500 transform group-hover:scale-110"></i>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-primary transition-colors">CycloAI</h3>
-                            <p class="text-textMuted text-sm mb-4 line-clamp-3">
-                                End-to-end ML pipeline processing 100+GB/day of satellite imagery. Two-stage detection system achieving sub-second inference — deployed in collaboration with <span class="text-white">ISRO</span>. Published at IEEE IGARSS 2025.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">PyTorch</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CUDA</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Python</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 2: Pose4DGS -->
+                     <!-- Project 1: Pose4DGS -->
                     <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
-                        <div class="h-40 bg-gradient-to-br from-accent/10 to-transparent relative overflow-hidden">
+                        <div class="h-36 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent relative overflow-hidden">
+                            <div class="absolute top-4 left-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">Jan 2026 – Present</span>
+                            </div>
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-cube text-4xl text-accent/30 group-hover:text-accent/80 transition-all duration-500 transform group-hover:scale-110"></i>
                             </div>
+                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-all duration-500"></div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-accent transition-colors">Pose4DGS</h3>
-                            <p class="text-textMuted text-sm mb-4 line-clamp-3">
-                                Pose-Conditioned 4D Gaussian Splatting for human avatars from monocular video. Added Pose-Space Augmentation (SMPL) and DINOv2 feature supervision. 3-tier evaluation protocol with full 2×2 ablation on ZJU-MoCap.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
+                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-accent transition-colors">Pose4DGS</h3>
+                            <ul class="space-y-2 mb-4">
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Implemented <span class="text-white">Pose-Conditioned 4D Gaussian Splatting</span> for generating pose-driven human avatars from monocular video using PyTorch and CUDA.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Engineered two zero-overhead training contributions — <span class="text-white">Pose-Space Augmentation</span> (SMPL interpolation) and <span class="text-white">DINOv2</span> (ViT-B/14) feature supervision — improving unseen-pose generalization.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Designed a <span class="text-white">3-tier evaluation protocol</span> (easy/moderate/extreme) and executed a full 2×2 ablation grid on ZJU-MoCap and PeopleSnapshot.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Coordinated a 3-person cross-functional team; tracked <span class="text-white">200+ runs</span> in W&B and co-authored a 6–8 page technical report.</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-accent bg-accent/10 px-2 py-1 rounded border border-accent/20">4D Gaussian Splatting</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">DINOv2</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">SMPL</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">W&B</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CUDA</span>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Project 3 -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
-                        <div class="h-40 bg-gradient-to-br from-purple-500/10 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://github.com/MayeshMohapatra/Recurrent-Attention-Model-for-Image-Classification" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-purple-500 transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <i class="fas fa-brain text-4xl text-purple-500/30 group-hover:text-purple-500/80 transition-all duration-500 transform group-hover:scale-110"></i>
-                            </div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">Recurrent Attention Model</h3>
-                            <p class="text-textMuted text-sm mb-4 line-clamp-3">
-                                Reproduced RAM in PyTorch for MNIST classification via sequential glimpses (REINFORCE), reaching <span class="text-white">96.64% accuracy</span> with only 6 glimpses (~49% of pixels) — matching full-image CNN baselines at a fraction of the compute.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-purple-400 bg-purple-500/10 px-2 py-1 rounded border border-purple-500/20">REINFORCE</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Attention</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4: 3D Human Reconstruction -->
+                     <!-- Project 2: 3D Human Reconstruction -->
                     <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-blue-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-400/5">
-                        <div class="h-40 bg-gradient-to-br from-blue-400/10 to-transparent relative overflow-hidden">
+                        <div class="h-36 bg-gradient-to-br from-blue-400/10 via-blue-500/5 to-transparent relative overflow-hidden">
+                            <div class="absolute top-4 left-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-blue-400 bg-blue-400/10 px-2.5 py-1 rounded-full border border-blue-400/20">Aug 2025 – Present</span>
+                            </div>
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-person-running text-4xl text-blue-400/30 group-hover:text-blue-400/80 transition-all duration-500 transform group-hover:scale-110"></i>
                             </div>
+                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-400/5 rounded-full blur-2xl group-hover:bg-blue-400/10 transition-all duration-500"></div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">3D Human Reconstruction</h3>
-                            <p class="text-textMuted text-sm mb-4 line-clamp-3">
-                                Neural rendering pipeline converting single-view RGB video into pose-driven 3D human meshes. Targeting sub-centimeter accuracy on ZJU-MoCap and Human3.6M with SMPL body priors.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
+                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">3D Human Reconstruction</h3>
+                            <ul class="space-y-2 mb-4">
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Architected a neural rendering pipeline converting single-view RGB video into geometrically accurate, pose-driven <span class="text-white">3D human meshes</span> using NeRF and Gaussian Splatting.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Modeled human motion interactions by combining neural implicit representations with <span class="text-white">SMPL body priors</span>, targeting sub-centimeter surface accuracy.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Evaluated reconstruction quality against SOTA baselines using <span class="text-white">PSNR, SSIM, LPIPS</span> on ZJU-MoCap and Human3.6M benchmarks.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Iterated on deformation-network architectures and loss functions to improve cross-subject generalization under Prof. Cheng Zhang.</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-blue-400 bg-blue-400/10 px-2 py-1 rounded border border-blue-400/20">NeRF</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Gaussian Splatting</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">SMPL</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">COLMAP</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 3: CycloAI -->
+                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-purple-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-400/5">
+                        <div class="h-36 bg-gradient-to-br from-purple-400/10 via-purple-400/5 to-transparent relative overflow-hidden">
+                            <div class="absolute top-4 left-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-purple-400 bg-purple-400/10 px-2.5 py-1 rounded-full border border-purple-400/20">May 2023 – May 2025</span>
+                            </div>
+                            <div class="absolute top-4 right-4 flex gap-2">
+                                <a href="https://www.vistalabiisc.com/research/cyc" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-purple-400 transition-all active:scale-95"><i class="fas fa-external-link-alt text-xs"></i></a>
+                            </div>
+                            <div class="absolute bottom-4 left-4">
+                                <i class="fas fa-satellite text-4xl text-purple-400/30 group-hover:text-purple-400/80 transition-all duration-500 transform group-hover:scale-110"></i>
+                            </div>
+                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-purple-400/5 rounded-full blur-2xl group-hover:bg-purple-400/10 transition-all duration-500"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">CycloAI</h3>
+                            <ul class="space-y-2 mb-4">
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Co-built an end-to-end multi-sensor perception pipeline processing <span class="text-white">100+ GB/day</span> of HDF5 multispectral satellite data with a two-stage detector (Center-Locator + Intensity-Estimator).</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Slashed inference from ~3–4 hrs to <span class="text-white">&lt;1 sec</span> via model pruning, INT8 quantization, and parallelized preprocessing — enabling near-real-time ISRO operational deployment.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Boosted minority-class recall by <span class="text-white">12%</span> using focal loss and SMOTE; assessed detection across 5+ spectral bands (mAP, RMSE); monitored 200+ runs in W&B.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Published at <span class="text-white">IEEE IGARSS 2025</span> (Brisbane) — containerized full pipeline with Docker for reproducible deployment.</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-purple-400 bg-purple-400/10 px-2 py-1 rounded border border-purple-400/20">PyTorch</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CUDA</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Docker</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Spark</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">GDAL</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Project 4: Deep-RL: Recurrent Attention Networks -->
+                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
+                        <div class="h-36 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent relative overflow-hidden">
+                            <div class="absolute top-4 left-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full border border-primary/20">Aug – Dec 2025</span>
+                            </div>
+                            <div class="absolute top-4 right-4 flex gap-2">
+                                <a href="https://github.com/MayeshMohapatra/Recurrent-Attention-Model-for-Image-Classification" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-primary transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
+                            </div>
+                            <div class="absolute bottom-4 left-4">
+                                <i class="fas fa-brain text-4xl text-primary/30 group-hover:text-primary/80 transition-all duration-500 transform group-hover:scale-110"></i>
+                            </div>
+                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500"></div>
+                        </div>
+                        <div class="p-6">
+                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors">Recurrent Attention Model</h3>
+                            <ul class="space-y-2 mb-4">
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Reproduced RAM in PyTorch for MNIST classification using sequential local glimpses trained with <span class="text-white">REINFORCE policy gradients</span>, reaching <span class="text-white">96.64% accuracy</span> with only 6 glimpses (~49% of pixels).</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Deployed a learned value baseline to reduce gradient variance; ablated glimpse count (4/6/8), patch resolution, and reward shaping strategies.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Visualized attention trajectories confirming systematic <span class="text-white">digit-edge fixation</span> patterns — matching full-image CNN baselines at a fraction of the compute.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Released a reproducible open-source codebase with scripted evaluations, training-stability analysis, and result visualizations.</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">REINFORCE</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Attention</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">NumPy</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 5: CNN Architectures from Scratch -->
                     <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-green-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-green-400/5">
-                        <div class="h-40 bg-gradient-to-br from-green-500/10 to-transparent relative overflow-hidden">
+                        <div class="h-36 bg-gradient-to-br from-green-500/10 via-green-500/5 to-transparent relative overflow-hidden">
+                            <div class="absolute top-4 left-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-green-400 bg-green-500/10 px-2.5 py-1 rounded-full border border-green-500/20">Aug – Dec 2022</span>
+                            </div>
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-layer-group text-4xl text-green-500/30 group-hover:text-green-500/80 transition-all duration-500 transform group-hover:scale-110"></i>
                             </div>
+                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-green-500/5 rounded-full blur-2xl group-hover:bg-green-500/10 transition-all duration-500"></div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-green-400 transition-colors">CNN Architectures from Scratch</h3>
-                            <p class="text-textMuted text-sm mb-4 line-clamp-3">
-                                Coded ResNet and VGG variants from first principles without pre-trained weights. Assessed convergence and generalization on CIFAR-10 and ImageNet subsets with gradient-flow analysis.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
+                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-green-400 transition-colors">CNN Architectures from Scratch</h3>
+                            <ul class="space-y-2 mb-4">
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-green-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Coded <span class="text-white">ResNet and VGG</span> variants from first principles in PyTorch without pre-trained weights, building deep intuition for residual connections and feature hierarchies.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-green-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Assessed convergence and generalization on <span class="text-white">CIFAR-10 and ImageNet</span> subsets with gradient-flow analysis and scripted benchmarks.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-green-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Diagnosed vanishing gradient issues in deep VGG, demonstrating ~<span class="text-white">2× faster convergence</span> with skip connections in ResNet counterparts.</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-green-400 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">ResNet</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">VGG</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">NumPy</span>
                             </div>
                         </div>
                     </div>
 
                     <!-- Project 6: Chest X-Ray Classification -->
                     <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-red-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-400/5">
-                        <div class="h-40 bg-gradient-to-br from-red-500/10 to-transparent relative overflow-hidden">
+                        <div class="h-36 bg-gradient-to-br from-red-500/10 via-red-500/5 to-transparent relative overflow-hidden">
+                            <div class="absolute top-4 left-4">
+                                <span class="text-[10px] uppercase tracking-wider font-bold text-red-400 bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/20">May 2021 – May 2022</span>
+                            </div>
                             <div class="absolute bottom-4 left-4">
                                 <i class="fas fa-x-ray text-4xl text-red-500/30 group-hover:text-red-500/80 transition-all duration-500 transform group-hover:scale-110"></i>
                             </div>
+                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-red-500/5 rounded-full blur-2xl group-hover:bg-red-500/10 transition-all duration-500"></div>
                         </div>
                         <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-2 group-hover:text-red-400 transition-colors">Chest X-Ray Pathology Classification</h3>
-                            <p class="text-textMuted text-sm mb-4 line-clamp-3">
-                                Fine-tuned DenseNet-121 on CheXpert matching published AUC benchmarks for 14 thoracic pathologies. Applied SMOTE and focal loss to raise minority-class recall by 8%.
-                            </p>
-                            <div class="flex flex-wrap gap-2 pt-2">
+                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-red-400 transition-colors">Chest X-Ray Pathology Classification</h3>
+                            <ul class="space-y-2 mb-4">
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-red-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Fine-tuned <span class="text-white">DenseNet-121</span> on CheXpert, matching published AUC benchmarks for <span class="text-white">14 thoracic pathologies</span> in a multi-label classification setting.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-red-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Applied <span class="text-white">SMOTE</span> and <span class="text-white">focal loss</span> to address severe class imbalance, raising minority-class recall by <span class="text-white">8%</span>.</span>
+                                </li>
+                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
+                                    <span class="text-red-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
+                                    <span>Built an end-to-end evaluation workflow with automated ROC/AUC computation and model versioning for reproducible experiments.</span>
+                                </li>
+                            </ul>
+                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-red-400 bg-red-500/10 px-2 py-1 rounded border border-red-500/20">DenseNet</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CheXpert</span>
                                 <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Medical AI</span>
+                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Scikit-Learn</span>
                             </div>
                         </div>
                     </div>

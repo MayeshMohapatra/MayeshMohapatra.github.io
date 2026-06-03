@@ -1,1099 +1,1432 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mayesh Mohapatra - Research Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Three.js for 3D Visualization -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        background: '#050505',
-                        surface: '#0a0a0a',
-                        surfaceHighlight: '#171717',
-                        primary: '#3b82f6',
-                        accent: '#06b6d4',
-                        textMain: '#ededed',
-                        textMuted: '#a3a3a3',
-                    },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                    },
-                    animation: {
-                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050505;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #262626;
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #404040;
-        }
-        
-        /* Cursor for typing effect */
-        .typing-cursor::after {
-            content: '|';
-            animation: blink 1s step-start infinite;
-            color: #3b82f6;
-        }
-        
-        @keyframes blink {
-            50% { opacity: 0; }
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mayesh Mohapatra — Research Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fafaf8;
+    --bg-alt: #f4f3ef;
+    --bg-card: #ffffff;
+    --border: #e5e3dc;
+    --border-strong: #ccc9be;
+    --text: #1a1916;
+    --text-muted: #6b6860;
+    --text-light: #9c9a93;
+    --accent: #2754c5;
+    --accent-light: #edf1fd;
+    --accent-mid: #c4d0f5;
+    --tag-bg: #f0eeea;
+    --tag-text: #4a4840;
+    --green: #1a7a4a;
+    --green-bg: #edf7f2;
+    --amber: #92400e;
+    --amber-bg: #fef3cd;
+    --red: #9f1239;
+    --red-bg: #fef2f2;
+  }
 
-        /* Canvas positioning for scrolling effect */
-        #canvas-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%; 
-            z-index: -1;
-            background: #050505;
-        }
-        
-        /* Ensure content sits above canvas */
-        .content-wrapper {
-            position: relative;
-            z-index: 10;
-        }
-    </style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { font-size: 16px; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ─── SCROLLBAR ─── */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 3px; }
+
+  /* ─── NAV ─── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250,250,248,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    height: 56px;
+    display: flex; align-items: center;
+  }
+
+  .nav-inner {
+    max-width: 1100px; margin: 0 auto; width: 100%;
+    padding: 0 32px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Newsreader', serif;
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--text);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-links {
+    display: flex; align-items: center; gap: 2px;
+  }
+
+  .nav-links a {
+    font-size: 0.82rem;
+    font-weight: 400;
+    color: var(--text-muted);
+    text-decoration: none;
+    padding: 5px 12px;
+    border-radius: 6px;
+    transition: color 0.15s, background 0.15s;
+  }
+  .nav-links a:hover { color: var(--text); background: var(--bg-alt); }
+
+  .nav-resume {
+    font-size: 0.82rem !important;
+    font-weight: 500 !important;
+    color: var(--accent) !important;
+    border: 1px solid var(--accent-mid) !important;
+    background: var(--accent-light) !important;
+    padding: 5px 14px !important;
+  }
+  .nav-resume:hover { background: var(--accent) !important; color: white !important; }
+
+  /* ─── LAYOUT ─── */
+  .wrapper { max-width: 1100px; margin: 0 auto; padding: 0 32px; }
+
+  section { padding: 96px 0; }
+
+  .section-header {
+    display: flex; align-items: center; gap: 20px;
+    margin-bottom: 56px;
+  }
+  .section-header h2 {
+    font-family: 'Newsreader', serif;
+    font-size: 1.75rem;
+    font-weight: 500;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* ─── HERO ─── */
+  #about {
+    padding-top: 136px;
+    padding-bottom: 80px;
+    min-height: 92vh;
+    display: flex; align-items: center;
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1fr 320px;
+    gap: 64px;
+    align-items: center;
+  }
+
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--green);
+    background: var(--green-bg);
+    border: 1px solid #a7dcc0;
+    padding: 5px 13px;
+    border-radius: 99px;
+    margin-bottom: 28px;
+  }
+  .hero-badge-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--green);
+    animation: pulse-green 2s ease-in-out infinite;
+  }
+  @keyframes pulse-green {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.85); }
+  }
+
+  .hero-name {
+    font-family: 'Newsreader', serif;
+    font-size: clamp(3.2rem, 6vw, 4.6rem);
+    font-weight: 400;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .hero-role-line {
+    font-size: 1.18rem;
+    color: var(--text-muted);
+    font-weight: 300;
+    margin-bottom: 30px;
+    min-height: 1.5em;
+  }
+  .hero-role-text {
+    color: var(--accent);
+    font-weight: 500;
+  }
+  .cursor {
+    display: inline-block;
+    width: 2px; height: 1em;
+    background: var(--accent);
+    margin-left: 2px;
+    vertical-align: text-bottom;
+    animation: blink 1s step-start infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  .hero-bio {
+    font-size: 1.05rem;
+    color: var(--text-muted);
+    line-height: 1.85;
+    max-width: 580px;
+    margin-bottom: 38px;
+  }
+  .hero-bio strong { color: var(--text); font-weight: 500; }
+
+  .hero-actions {
+    display: flex; gap: 12px; flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .btn {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-size: 0.85rem; font-weight: 500;
+    padding: 9px 22px;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.15s;
+    border: 1px solid transparent;
+    cursor: pointer;
+  }
+  .btn-primary {
+    background: var(--text); color: #fff;
+    border-color: var(--text);
+  }
+  .btn-primary:hover { background: #333; }
+  .btn-ghost {
+    background: transparent; color: var(--text-muted);
+    border-color: var(--border-strong);
+  }
+  .btn-ghost:hover { color: var(--text); border-color: var(--text); background: var(--bg-alt); }
+
+  .hero-socials {
+    display: flex; gap: 16px; align-items: center;
+  }
+  .hero-socials a {
+    width: 34px; height: 34px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: all 0.15s;
+  }
+  .hero-socials a:hover { color: var(--text); border-color: var(--border-strong); background: var(--bg-alt); }
+
+  /* Hero Visual — canvas */
+  .hero-visual {
+    position: relative;
+    display: flex; align-items: center; justify-content: center;
+  }
+  #hero-canvas {
+    width: 100%;
+    max-width: 320px;
+    height: 340px;
+    display: block;
+  }
+
+  /* Dynamic background — scrolling dot mesh */
+  #bg-canvas {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .wrapper, nav { position: relative; z-index: 1; }
+  section { position: relative; z-index: 1; }
+
+  /* ─── EXPERIENCE ─── */
+  .timeline { position: relative; padding-left: 24px; }
+  .timeline::before {
+    content: '';
+    position: absolute; left: 0; top: 8px; bottom: 8px;
+    width: 1px; background: var(--border);
+  }
+
+  .timeline-item {
+    position: relative;
+    padding-bottom: 40px;
+  }
+  .timeline-item:last-child { padding-bottom: 0; }
+
+  .timeline-dot {
+    position: absolute; left: -28px; top: 8px;
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--bg-card);
+    border: 2px solid var(--border-strong);
+    transition: border-color 0.2s;
+  }
+  .timeline-item:hover .timeline-dot { border-color: var(--accent); }
+
+  .exp-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  .exp-card:hover { border-color: var(--border-strong); box-shadow: 0 2px 12px rgba(0,0,0,0.05); }
+
+  .exp-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px;
+    gap: 16px;
+  }
+  .exp-title { font-weight: 600; font-size: 1rem; color: var(--text); }
+  .exp-org { font-size: 0.85rem; color: var(--text-muted); margin-top: 3px; }
+  .exp-date {
+    font-size: 0.75rem; font-weight: 500;
+    color: var(--text-light);
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 3px 10px;
+    border-radius: 6px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .exp-bullets { list-style: none; }
+  .exp-bullets li {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.65;
+    padding: 4px 0;
+    padding-left: 16px;
+    position: relative;
+  }
+  .exp-bullets li::before {
+    content: '—';
+    position: absolute; left: 0;
+    color: var(--border-strong);
+    font-size: 0.8rem;
+  }
+  .exp-bullets strong { color: var(--text); font-weight: 500; }
+  .exp-bullets em { color: var(--text); font-style: normal; font-weight: 500; }
+
+  /* ─── EDUCATION ─── */
+  .edu-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+  .edu-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    transition: border-color 0.2s;
+  }
+  .edu-card:hover { border-color: var(--border-strong); }
+
+  .edu-school { font-weight: 600; font-size: 1rem; color: var(--text); margin-bottom: 3px; }
+  .edu-degree { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+  .edu-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px; }
+  .edu-tag {
+    font-size: 0.72rem; font-weight: 500;
+    padding: 3px 10px; border-radius: 6px;
+    background: var(--tag-bg); color: var(--tag-text);
+    border: 1px solid var(--border);
+  }
+  .edu-tag.accent { background: var(--accent-light); color: var(--accent); border-color: var(--accent-mid); }
+
+  .edu-courses { display: flex; flex-wrap: wrap; gap: 6px; }
+  .course-pill {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: 6px;
+  }
+
+  /* ─── PROJECTS ─── */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+
+  .project-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px;
+    display: flex; flex-direction: column;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .project-card:hover {
+    border-color: var(--border-strong);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transform: translateY(-2px);
+  }
+
+  .project-top {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 14px;
+  }
+  .project-date {
+    font-size: 0.7rem; font-weight: 500;
+    color: var(--text-light); text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .project-links { display: flex; gap: 6px; }
+  .project-link {
+    width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px; border: 1px solid var(--border);
+    color: var(--text-muted);
+    text-decoration: none; font-size: 0.8rem;
+    transition: all 0.15s;
+  }
+  .project-link:hover { color: var(--text); border-color: var(--border-strong); background: var(--bg-alt); }
+
+  .project-status {
+    font-size: 0.65rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.06em;
+    padding: 2px 8px; border-radius: 99px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  .status-active { background: var(--green-bg); color: var(--green); border: 1px solid #a7dcc0; }
+  .status-wip { background: var(--amber-bg); color: var(--amber); border: 1px solid #fbbf24; }
+  .status-done { background: var(--tag-bg); color: var(--tag-text); border: 1px solid var(--border); }
+
+  .project-title { font-weight: 600; font-size: 0.95rem; color: var(--text); margin-bottom: 10px; }
+
+  .project-bullets { list-style: none; flex: 1; margin-bottom: 16px; }
+  .project-bullets li {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    padding: 2px 0;
+    padding-left: 13px;
+    position: relative;
+  }
+  .project-bullets li::before {
+    content: '·';
+    position: absolute; left: 0;
+    color: var(--accent); font-size: 1rem;
+    line-height: 1.5;
+  }
+  .project-bullets strong { color: var(--text); font-weight: 500; }
+
+  .tech-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: auto; }
+  .tech-tag {
+    font-size: 0.68rem; font-weight: 500;
+    color: var(--tag-text);
+    background: var(--tag-bg);
+    border: 1px solid var(--border);
+    padding: 3px 8px; border-radius: 5px;
+  }
+  .tech-tag.primary { background: var(--accent-light); color: var(--accent); border-color: var(--accent-mid); }
+
+  /* ─── PUBLICATIONS ─── */
+  .pub-list { display: flex; flex-direction: column; gap: 10px; }
+
+  .pub-card {
+    display: block;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px 24px;
+    text-decoration: none;
+    transition: all 0.15s;
+    display: flex; align-items: flex-start; gap: 16px;
+  }
+  .pub-card:hover { border-color: var(--border-strong); background: var(--bg-alt); }
+
+  .pub-num {
+    font-family: 'Newsreader', serif;
+    font-size: 1.1rem; color: var(--text-light);
+    flex-shrink: 0; padding-top: 1px;
+  }
+  .pub-content { flex: 1; }
+  .pub-title { font-weight: 500; font-size: 0.9rem; color: var(--text); line-height: 1.5; margin-bottom: 6px; }
+  .pub-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .pub-venue {
+    font-size: 0.78rem; color: var(--text-muted); font-style: italic;
+  }
+  .pub-badge {
+    font-size: 0.65rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.05em;
+    background: var(--accent-light); color: var(--accent);
+    border: 1px solid var(--accent-mid);
+    padding: 2px 8px; border-radius: 99px;
+  }
+  .pub-arrow { color: var(--text-light); font-size: 0.8rem; transition: transform 0.15s; flex-shrink: 0; padding-top: 3px; }
+  .pub-card:hover .pub-arrow { transform: translateX(3px); color: var(--accent); }
+
+  /* ─── SKILLS ─── */
+  .skills-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
+
+  .skill-group h3 {
+    font-size: 0.72rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-light);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+  .skill-tag {
+    font-size: 0.82rem; font-weight: 400;
+    color: var(--tag-text);
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    padding: 5px 13px; border-radius: 7px;
+    cursor: default;
+    transition: all 0.15s;
+  }
+  .skill-tag:hover { border-color: var(--accent-mid); color: var(--accent); background: var(--accent-light); }
+  .skill-tag.highlight { background: var(--accent-light); color: var(--accent); border-color: var(--accent-mid); }
+
+  /* ─── CONTACT ─── */
+  #contact {
+    background: var(--bg-alt);
+    border-top: 1px solid var(--border);
+    padding: 80px 0;
+  }
+  .contact-inner { max-width: 560px; }
+  .contact-inner h2 {
+    font-family: 'Newsreader', serif;
+    font-size: 2rem; font-weight: 400;
+    letter-spacing: -0.04em;
+    margin-bottom: 12px;
+  }
+  .contact-inner p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 32px; }
+  .contact-inner strong { color: var(--text); font-weight: 500; }
+  .contact-links { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 64px; }
+
+  .footer-line {
+    display: flex; justify-content: space-between; align-items: center;
+    padding-top: 24px; border-top: 1px solid var(--border);
+    font-size: 0.78rem; color: var(--text-light);
+  }
+
+  /* ─── MOBILE ─── */
+  .mobile-menu-btn {
+    display: none;
+    background: none; border: none; cursor: pointer;
+    color: var(--text-muted); font-size: 1.1rem; padding: 4px;
+  }
+
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+    .hero-visual { display: none; }
+    .edu-cards { grid-template-columns: 1fr; }
+    .projects-grid { grid-template-columns: 1fr 1fr; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .nav-links a:not(.nav-resume):not(:nth-last-child(-n+2)) { display: none; }
+  }
+  @media (max-width: 640px) {
+    .wrapper { padding: 0 20px; }
+    section { padding: 72px 0; }
+    .hero-name { font-size: 2.5rem; }
+    .projects-grid { grid-template-columns: 1fr; }
+    .hero-actions { flex-direction: column; }
+    .hero-actions .btn { width: 100%; justify-content: center; }
+    .contact-links { flex-direction: column; }
+    .nav-links { display: none; }
+    .mobile-menu-btn { display: block; }
+  }
+</style>
 </head>
-<body class="bg-background text-textMain font-sans antialiased selection:bg-primary selection:text-white relative min-h-screen">
 
-    <!-- Background Particles Canvas -->
-    <canvas id="canvas-container"></canvas>
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed w-full top-0 left-0 z-50 transition-all duration-300" id="navbar">
-        <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-end h-20 items-center">
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-1">
-                        <a href="#about" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">About</a>
-                        <a href="#experience" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Experience</a>
-                        <a href="#education" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Education</a>
-                        <a href="#projects" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Projects</a>
-                        <a href="#publications" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Publications</a>
-                        <a href="#skills" class="text-sm font-medium text-textMuted hover:text-white hover:bg-white/5 px-4 py-2 rounded-full transition-all active:scale-95">Skills</a>
-                        <a href="#contact" class="ml-2 bg-white/10 border border-white/10 hover:bg-white/20 text-white px-5 py-2 rounded-full text-sm font-medium transition-all backdrop-blur-md active:scale-95 hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]">Contact</a>
-                        <a href="Mohapatra-Mayesh.pdf" target="_blank" class="ml-2 bg-primary border border-primary hover:bg-blue-600 text-white px-5 py-2 rounded-full text-sm font-bold transition-all backdrop-blur-md active:scale-95 hover:shadow-[0_0_15px_rgba(59,130,246,0.4)]"><i class="fas fa-file-alt mr-1.5"></i>Resume</a>
-                    </div>
-                </div>
-                <!-- Mobile menu button -->
-                <div class="-mr-2 flex md:hidden">
-                    <button type="button" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')" class="inline-flex items-center justify-center p-2 rounded-md text-textMuted hover:text-white focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
-            </div>
+<!-- Background canvas -->
+<canvas id="bg-canvas"></canvas>
+
+<!-- ─── NAVIGATION ─── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#about" class="nav-logo">Mayesh Mohapatra</a>
+    <div class="nav-links">
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#publications">Publications</a>
+      <a href="#skills">Skills</a>
+      <a href="#contact">Contact</a>
+      <a href="Mohapatra_Mayesh.pdf" target="_blank" class="btn nav-resume">
+        <i class="fas fa-file-alt"></i> Resume
+      </a>
+    </div>
+    <button class="mobile-menu-btn" onclick="toggleMobileMenu()"><i class="fas fa-bars"></i></button>
+  </div>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section id="about">
+  <div class="wrapper">
+    <div class="hero-inner">
+
+      <div class="hero-left">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          Open to Research &amp; Industry Roles
         </div>
-        <!-- Mobile Menu -->
-        <div class="hidden md:hidden bg-surface/95 backdrop-blur-xl border-b border-white/5" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">About</a>
-                <a href="#experience" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">Experience</a>
-                <a href="#education" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">Education</a>
-                <a href="#projects" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">Projects</a>
-                <a href="#publications" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">Publications</a>
-                <a href="#skills" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">Skills</a>
-                <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-textMuted hover:text-white hover:bg-white/5">Contact</a>
-                <a href="Mohapatra-Mayesh.pdf" target="_blank" class="block px-3 py-2 rounded-md text-base font-bold text-primary hover:text-white hover:bg-primary/20"><i class="fas fa-file-alt mr-1.5"></i>Resume</a>
-            </div>
+
+        <h1 class="hero-name">Mayesh Mohapatra</h1>
+
+        <p class="hero-role-line">
+          Working in
+          <span class="hero-role-text" id="role-text"></span><span class="cursor"></span>
+        </p>
+
+        <p class="hero-bio">
+          Graduate Researcher at Texas A&M working on <strong>generative models for image synthesis</strong> and <strong>3D vision</strong>. Interested in diffusion transformers, flow matching, and controllable generation. Published at <strong>IEEE IGARSS 2025</strong> and <strong>ISRO-IISc</strong>. Previously shipped ML systems at IISc and Deloitte that cut inference latency by 10,000×.
+        </p>
+
+        <div class="hero-actions">
+          <a href="Mohapatra_Mayesh.pdf" target="_blank" class="btn btn-primary">
+            <i class="fas fa-download"></i> Download Resume
+          </a>
+          <a href="#projects" class="btn btn-ghost">
+            View Projects <i class="fas fa-arrow-down" style="font-size:0.75rem"></i>
+          </a>
         </div>
-    </nav>
 
-    <div class="content-wrapper">
-        <!-- Hero Section -->
-        <section id="about" class="pt-40 pb-20 px-4 sm:px-6 lg:px-8 max-w-6xl mx-auto min-h-[90vh] flex flex-col justify-center">
-            <div class="text-center md:text-left md:flex md:items-center md:justify-between">
-                <div class="md:w-3/5">
-                    <div class="inline-flex items-center space-x-2 px-3 py-1 mb-6 text-xs font-medium tracking-wider text-accent uppercase bg-accent/5 border border-accent/20 rounded-full">
-                        <span class="w-2 h-2 rounded-full bg-accent animate-pulse"></span>
-                        <span>Available for Research and Development Roles</span>
-                    </div>
-                    
-                    <h1 class="text-5xl tracking-tight font-bold text-white sm:text-6xl md:text-7xl mb-4">
-                        Hi, I'm <span id="name-typewriter" class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-blue-400 to-accent"></span><span class="text-primary animate-pulse">|</span>
-                    </h1>
-                    
-                    <div class="mb-6 text-center md:text-left leading-tight">
-                        <span class="text-xl sm:text-2xl text-textMuted font-light">I work in the domain of </span>
-                        <span id="role-typewriter" class="text-xl sm:text-2xl text-white font-medium typing-cursor break-words"></span>
-                    </div>
-                    
-                    <p class="mt-4 text-base text-textMuted sm:mt-5 sm:text-lg sm:max-w-2xl md:mt-5 md:text-xl mb-10 leading-relaxed font-light">
-                        Graduate Researcher at Texas A&M building production-grade <strong class="text-white font-normal">3D human reconstruction</strong> pipelines from monocular video. Published at <strong class="text-white font-normal">IEEE IGARSS</strong> and <strong class="text-white font-normal">ISRO-IISc</strong>. Previously shipped ML systems at IISc and Deloitte that cut processing time by 40% and inference latency to under one second.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                        <a href="Mohapatra-Mayesh.pdf" target="_blank" class="inline-flex items-center justify-center px-8 py-4 border border-transparent text-base font-bold rounded-full text-white bg-primary hover:bg-blue-600 transition-all active:scale-95 shadow-lg hover:shadow-primary/30">
-                            <i class="fas fa-file-alt mr-2"></i> Download Resume
-                        </a>
-                        <a href="#projects" class="inline-flex items-center justify-center px-8 py-4 border border-white/10 text-base font-medium rounded-full text-textMuted hover:text-white hover:bg-white/5 transition-all active:scale-95">
-                            <i class="fas fa-arrow-down mr-2 text-xs"></i> View Work
-                        </a>
-                    </div>
-                    
-                    <div class="mt-10 flex space-x-6 justify-center md:justify-start text-textMuted items-center">
-                        <a href="https://github.com/MayeshMohapatra" target="_blank" class="hover:text-white transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fab fa-github text-2xl"></i></a>
-                        <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="hover:text-blue-400 transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fab fa-linkedin text-2xl"></i></a>
-                        <a href="mailto:mayesh@tamu.edu" class="hover:text-white transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fas fa-envelope text-2xl"></i></a>
-                        <a href="https://scholar.google.com/citations?user=2IRfuAcAAAAJ&hl=en" target="_blank" class="hover:text-white transition-all hover:scale-110 transform duration-200 active:scale-95"><i class="fas fa-graduation-cap text-2xl"></i></a>
-                        <div class="h-px w-12 bg-white/10 ml-4 hidden md:block"></div>
-                    </div>
-                </div>
-                
-                <!-- NEW HERO VISUALIZATION: 3D Point Cloud Reconstruction -->
-                <div class="mt-16 md:mt-0 md:w-2/5 flex justify-center md:justify-end relative">
-                    <!-- Glow Effect -->
-                    <div class="absolute -inset-10 bg-gradient-to-r from-primary/10 to-accent/10 rounded-full blur-3xl opacity-20"></div>
-                    
-                    <!-- Three.js Container -->
-                    <div id="hero-3d-container" class="relative w-full h-[400px] md:h-[500px] flex items-center justify-center">
-                        <!-- Canvas will be injected here by script -->
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="hero-socials">
+          <a href="https://github.com/MayeshMohapatra" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+          <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+          <a href="mailto:mayesh@tamu.edu" title="Email"><i class="far fa-envelope"></i></a>
+          <a href="https://scholar.google.com/citations?user=2IRfuAcAAAAJ&hl=en" target="_blank" title="Google Scholar"><i class="fas fa-graduation-cap"></i></a>
+        </div>
+      </div>
 
-        <!-- Experience Section -->
-        <section id="experience" class="py-24 relative">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="flex items-end mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Work Experience</h2>
-                    <div class="h-px bg-white/10 flex-grow ml-6 mb-2"></div>
-                </div>
-                
-                <div class="space-y-8 relative border-l border-white/10 ml-3 md:ml-6">
-                    
-                    <!-- Job 1: TAMU (Primary Blue Theme) -->
-                    <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-primary group-hover:border-primary group-hover:shadow-[0_0_12px_rgba(59,130,246,0.6)]"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-primary">Graduate Researcher</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Texas A&M University · Advisor: Prof. Cheng Zhang</div>
-                                </div>
-                                <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Aug 2025 - Present</span>
-                            </div>
-                            <ul class="space-y-2 mb-0">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>3D Scene Reconstruction:</strong> Developed an end-to-end pipeline converting monocular athlete video into dynamic 3D scenes, integrating <span class="text-white">Human3R</span>, <span class="text-white">VGGT</span> for pose estimation and <span class="text-white">DeepLabv3</span> for semantic segmentation.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Real-Time Inference:</strong> Accelerated pipeline via mixed-precision CUDA kernels and INT8 quantization, achieving <span class="text-white">40% latency reduction</span> for real-time biomechanical feedback during live training.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Biomechanical Analytics:</strong> Engineered a module to auto-extract metrics (jump height, center-of-mass velocity, takeoff angle) for data-driven coaching across <span class="text-white">3+ athlete disciplines</span>.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+      <!-- Hero canvas visualization -->
+      <div class="hero-visual">
+        <canvas id="hero-canvas"></canvas>
+      </div>
 
-                    <!-- Job 2: IISc (Accent Cyan Theme) -->
-                    <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-accent group-hover:border-accent group-hover:shadow-[0_0_12px_rgba(6,182,212,0.6)]"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-accent">Project Associate</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Indian Institute of Science (IISc) & ISRO Space Applications Centre</div>
-                                </div>
-                                <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">May 2023 - May 2025</span>
-                            </div>
-                            <ul class="space-y-2 mb-0">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Data Pipeline:</strong> Constructed an automated Python pipeline processing <span class="text-white">100+ GB/day</span> of HDF5 multispectral imagery, generating ~14,000 annotated frames via GDAL/Rasterio, lifting throughput by <span class="text-white">30%</span>.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Inference Optimization:</strong> Slashed inference latency from ~3-4 hrs to <span class="text-white">under 1 second</span> through model pruning, INT8 quantization, and parallelized preprocessing for near-real-time operational deployment.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Experiment Tracking:</strong> Logged <span class="text-white">200+ experiments</span> in Weights & Biases; containerized full pipeline with Docker; scaled data workflows with Spark and Dask.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Research Impact:</strong> Co-authored peer-reviewed paper accepted at <span class="text-white">IEEE IGARSS 2025</span> (Brisbane) on deep-learning cyclone detection in collaboration with ISRO.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                                        <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-purple-500 group-hover:border-purple-500 group-hover:shadow-[0_0_12px_rgba(168,85,247,0.6)]"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-purple-400">Research Intern</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Georgia Institute of Technology</div>
-                                </div>
-                                <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Jan 2023 - May 2023</span>
-                            </div>
-                            <ul class="space-y-2 mb-0">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-500/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Generative AI:</strong> Synthesized insider-threat datasets with <span class="text-white">GANs</span> in PyTorch, expanding rare-class coverage and boosting out-of-distribution robustness by <span class="text-white">15%</span>.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-500/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Anomaly Detection:</strong> Trained unsupervised autoencoder-based detectors (+12% recall for rare events); combined with supervised ensemble (Random Forest, Logistic Regression) to reach <span class="text-white">95% accuracy</span>.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-500/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Data Engineering:</strong> Streamlined data-cleaning workflows with Pandas and NumPy, cutting preprocessing time by <span class="text-white">25%</span> across 5+ dataset splits.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                    <!-- Job 3: Deloitte (Green Theme) -->
-                    <div class="relative pl-8 md:pl-12 group">
-                        <div class="absolute -left-[5px] top-2 h-2.5 w-2.5 rounded-full bg-surface border border-white/20 transition-all duration-300 group-hover:bg-green-500 group-hover:border-green-500 group-hover:shadow-[0_0_12px_rgba(34,197,94,0.6)]"></div>
-                        <div class="bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 group-hover:bg-surface/60 group-hover:border-white/20 group-hover:shadow-lg">
-                            <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                                <div>
-                                    <h3 class="text-xl font-bold text-textMain transition-colors duration-300 group-hover:text-green-400">Data Science Intern</h3>
-                                    <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Deloitte Haskins and Sells LLP</div>
-                                </div>
-                                <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Jun 2022 - Mar 2023</span>
-                            </div>
-                            <ul class="space-y-2 mb-0">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-green-500/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Automated Auditing:</strong> Engineered Python/SQL workflows to automate journal-entry testing, slashing manual review time by <span class="text-white">40%</span>.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-green-500/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Big Data Optimization:</strong> Optimized large-scale <span class="text-white">Spark</span> ETL pipelines, eliminating 15+ hours of weekly maintenance overhead.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-green-500/50 mr-2 mt-1.5 text-xs">●</span>
-                                    <span><strong>Business Intelligence:</strong> Deployed <span class="text-white">85%</span> of Power BI dashboards and exception-analysis tools adopted across <span class="text-white">4+ audit teams</span>.</span>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
+    </div>
+  </div>
+</section>
 
-                    <!-- Job 4: Georgia Tech (Purple Theme) -->
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Education Section -->
-        <section id="education" class="py-24 bg-gradient-to-b from-transparent to-surface/20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-end mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Education</h2>
-                    <div class="h-px bg-white/10 flex-grow ml-6 mb-2"></div>
-                </div>
-
-                <div class="space-y-8">
-                    <!-- Texas A&M -->
-                    <div class="group bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 hover:bg-surface/60 hover:border-white/20 hover:shadow-lg">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white group-hover:text-primary transition-colors">Master of Science in Computer Science</h3>
-                                <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Texas A&M University, College Station, TX</div>
-                            </div>
-                            <span class="mt-2 md:mt-0 text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">Aug 2025 - Expected May 2027</span>
-                        </div>
-                        <div class="mt-4">
-                            <h4 class="text-xs uppercase tracking-widest text-textMuted font-bold mb-3">Relevant Coursework</h4>
-                            <div class="flex flex-wrap gap-2">
-                                <!-- UPDATE THESE WITH YOUR ACTUAL COURSES -->
-                                <span class="text-xs font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">Computer Vision and Robotic Perception</span>
-                                <span class="text-xs font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">3D Computer Vision and Computer Graphics</span>
-                                <span class="text-xs font-medium text-primary bg-primary/10 px-3 py-1.5 rounded-full border border-primary/20">Deep Learning</span>
-                                <span class="text-xs font-medium text-accent bg-accent/10 px-3 py-1.5 rounded-full border border-accent/20">Deep Reinforcement Learning</span>
-                                <span class="text-xs font-medium text-accent bg-accent/10 px-3 py-1.5 rounded-full border border-accent/20">Analysis of Algorithms</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Bennett University -->
-                    <div class="group bg-surface/30 border border-white/5 p-6 rounded-2xl transition-all duration-300 hover:bg-surface/60 hover:border-white/20 hover:shadow-lg">
-                        <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                            <div>
-                                <h3 class="text-xl font-bold text-white group-hover:text-accent transition-colors">B.Tech (Honors), Computer Science Engineering</h3>
-                                <div class="text-textMuted text-sm font-medium mt-1 group-hover:text-white transition-colors">Bennett University, Greater Noida, UP</div>
-                            </div>
-                            <div class="flex items-center gap-3 mt-2 md:mt-0">
-                                <span class="text-xs font-bold text-accent bg-accent/10 px-3 py-1 rounded-full border border-accent/20">GPA: 3.54 / 4.0</span>
-                                <span class="text-xs font-medium text-textMuted bg-white/5 px-3 py-1 rounded-full border border-white/5">May 2023</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="py-24 bg-gradient-to-b from-transparent to-surface/30">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-end mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Featured Projects</h2>
-                    <div class="h-px bg-white/10 flex-grow ml-6 mb-2"></div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                     <!-- Project 1: Pose4DGS -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-accent/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-accent/5">
-                        <div class="h-36 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 left-4">
-                                <span class="text-[10px] uppercase tracking-wider font-bold text-accent bg-accent/10 px-2.5 py-1 rounded-full border border-accent/20">Jan 2026 – Present</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <!-- 4D Gaussian splat cloud SVG -->
-                                <svg class="w-10 h-10 text-accent/30 group-hover:text-accent/80 transition-all duration-500 transform group-hover:scale-110" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="24" cy="24" r="6" fill="currentColor" opacity="0.6"/><circle cx="14" cy="18" r="4" fill="currentColor" opacity="0.4"/><circle cx="34" cy="18" r="4" fill="currentColor" opacity="0.4"/><circle cx="18" cy="32" r="3.5" fill="currentColor" opacity="0.35"/><circle cx="30" cy="32" r="3.5" fill="currentColor" opacity="0.35"/><circle cx="24" cy="12" r="3" fill="currentColor" opacity="0.3"/><circle cx="10" cy="28" r="2.5" fill="currentColor" opacity="0.25"/><circle cx="38" cy="28" r="2.5" fill="currentColor" opacity="0.25"/><circle cx="24" cy="38" r="2" fill="currentColor" opacity="0.2"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-accent/5 rounded-full blur-2xl group-hover:bg-accent/10 transition-all duration-500"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-accent transition-colors">Pose4DGS</h3>
-                            <ul class="space-y-2 mb-4">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Implemented <span class="text-white">Pose-Conditioned 4D Gaussian Splatting</span> for generating pose-driven human avatars from monocular video using PyTorch and CUDA.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Engineered two zero-overhead training contributions — <span class="text-white">Pose-Space Augmentation</span> (SMPL interpolation) and <span class="text-white">DINOv2</span> (ViT-B/14) feature supervision — improving unseen-pose generalization.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Designed a <span class="text-white">3-tier evaluation protocol</span> (easy/moderate/extreme) and executed a full 2×2 ablation grid on ZJU-MoCap and PeopleSnapshot.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-accent mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Coordinated a 3-person cross-functional team; tracked <span class="text-white">200+ runs</span> in W&B and co-authored a 6–8 page technical report.</span>
-                                </li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-accent bg-accent/10 px-2 py-1 rounded border border-accent/20">4D Gaussian Splatting</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">DINOv2</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">SMPL</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">W&B</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CUDA</span>
-                            </div>
-                        </div>
-                    </div>
-
-                     <!-- Project 2: 3D Human Reconstruction -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-blue-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-blue-400/5">
-                        <div class="h-36 bg-gradient-to-br from-blue-400/10 via-blue-500/5 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 left-4">
-                                <span class="text-[10px] uppercase tracking-wider font-bold text-blue-400 bg-blue-400/10 px-2.5 py-1 rounded-full border border-blue-400/20">Aug 2025 – Present</span>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <!-- Human figure / mesh wireframe SVG -->
-                                <svg class="w-10 h-10 text-blue-400/30 group-hover:text-blue-400/80 transition-all duration-500 transform group-hover:scale-110" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="24" cy="10" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="24" y1="15" x2="24" y2="30" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="20" x2="16" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="20" x2="32" y2="26" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="30" x2="18" y2="40" stroke="currentColor" stroke-width="1.5"/><line x1="24" y1="30" x2="30" y2="40" stroke="currentColor" stroke-width="1.5"/><circle cx="24" cy="10" r="2" fill="currentColor" opacity="0.4"/><circle cx="16" cy="26" r="1.5" fill="currentColor" opacity="0.3"/><circle cx="32" cy="26" r="1.5" fill="currentColor" opacity="0.3"/><circle cx="18" cy="40" r="1.5" fill="currentColor" opacity="0.3"/><circle cx="30" cy="40" r="1.5" fill="currentColor" opacity="0.3"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-blue-400/5 rounded-full blur-2xl group-hover:bg-blue-400/10 transition-all duration-500"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-blue-400 transition-colors">3D Human Reconstruction</h3>
-                            <ul class="space-y-2 mb-4">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Architected a neural rendering pipeline converting single-view RGB video into geometrically accurate, pose-driven <span class="text-white">3D human meshes</span> using NeRF and Gaussian Splatting.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Modeled human motion interactions by combining neural implicit representations with <span class="text-white">SMPL body priors</span>, targeting sub-centimeter surface accuracy.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Evaluated reconstruction quality against SOTA baselines using <span class="text-white">PSNR, SSIM, LPIPS</span> on ZJU-MoCap and Human3.6M benchmarks.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-blue-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Iterated on deformation-network architectures and loss functions to improve cross-subject generalization under Prof. Cheng Zhang.</span>
-                                </li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-blue-400 bg-blue-400/10 px-2 py-1 rounded border border-blue-400/20">NeRF</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Gaussian Splatting</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">SMPL</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">COLMAP</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 3: Recurrent Attention Model -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-primary/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-primary/5">
-                        <div class="h-36 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 left-4">
-                                <span class="text-[10px] uppercase tracking-wider font-bold text-primary bg-primary/10 px-2.5 py-1 rounded-full border border-primary/20">Aug – Dec 2025</span>
-                            </div>
-                            <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://github.com/MayeshMohapatra/Recurrent-Attention-Model-for-Image-Classification" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-primary transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <!-- Eye / attention focus SVG -->
-                                <svg class="w-10 h-10 text-primary/30 group-hover:text-primary/80 transition-all duration-500 transform group-hover:scale-110" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M4 24C4 24 12 12 24 12C36 12 44 24 44 24C44 24 36 36 24 36C12 36 4 24 4 24Z" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="1.5" fill="none"/><circle cx="24" cy="24" r="2.5" fill="currentColor" opacity="0.6"/><line x1="24" y1="6" x2="24" y2="11" stroke="currentColor" stroke-width="1" opacity="0.3"/><line x1="36" y1="9" x2="33" y2="13" stroke="currentColor" stroke-width="1" opacity="0.3"/><line x1="12" y1="9" x2="15" y2="13" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-primary/5 rounded-full blur-2xl group-hover:bg-primary/10 transition-all duration-500"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-primary transition-colors">Recurrent Attention Model</h3>
-                            <ul class="space-y-2 mb-4">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Reproduced RAM in PyTorch for MNIST classification using sequential local glimpses trained with <span class="text-white">REINFORCE policy gradients</span>, reaching <span class="text-white">96.64% accuracy</span> with only 6 glimpses (~49% of pixels).</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Deployed a learned value baseline to reduce gradient variance; ablated glimpse count (4/6/8), patch resolution, and reward shaping strategies.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Visualized attention trajectories confirming systematic <span class="text-white">digit-edge fixation</span> patterns — matching full-image CNN baselines at a fraction of the compute.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-primary mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Released a reproducible open-source codebase with scripted evaluations, training-stability analysis, and result visualizations.</span>
-                                </li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-primary bg-primary/10 px-2 py-1 rounded border border-primary/20">REINFORCE</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Attention</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">NumPy</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 4: CycloAI -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-purple-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-purple-400/5">
-                        <div class="h-36 bg-gradient-to-br from-purple-400/10 via-purple-400/5 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 left-4">
-                                <span class="text-[10px] uppercase tracking-wider font-bold text-purple-400 bg-purple-400/10 px-2.5 py-1 rounded-full border border-purple-400/20">May 2023 – May 2025</span>
-                            </div>
-                            <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://www.vistalabiisc.com/research/cyc" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-purple-400 transition-all active:scale-95"><i class="fas fa-external-link-alt text-xs"></i></a>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <!-- Cyclone / satellite SVG -->
-                                <svg class="w-10 h-10 text-purple-400/30 group-hover:text-purple-400/80 transition-all duration-500 transform group-hover:scale-110" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <circle cx="24" cy="24" r="4" fill="currentColor" opacity="0.5"/><path d="M24 8C30 8 36 12 38 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M38 18C42 24 40 32 34 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M34 36C28 40 20 40 14 36" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><path d="M14 36C8 30 8 22 12 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="0.75" stroke-dasharray="3 3" fill="none" opacity="0.3"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-purple-400/5 rounded-full blur-2xl group-hover:bg-purple-400/10 transition-all duration-500"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-purple-400 transition-colors">CycloAI</h3>
-                            <ul class="space-y-2 mb-4">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Co-built an end-to-end multi-sensor perception pipeline processing <span class="text-white">100+ GB/day</span> of HDF5 multispectral satellite data with a two-stage detector (Center-Locator + Intensity-Estimator).</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Slashed inference from ~3–4 hrs to <span class="text-white">&lt;1 sec</span> via model pruning, INT8 quantization, and parallelized preprocessing — enabling near-real-time ISRO operational deployment.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Boosted minority-class recall by <span class="text-white">12%</span> using focal loss and SMOTE; assessed detection across 5+ spectral bands (mAP, RMSE); monitored 200+ runs in W&B.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-purple-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Published at <span class="text-white">IEEE IGARSS 2025</span> (Brisbane) — containerized full pipeline with Docker for reproducible deployment.</span>
-                                </li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-purple-400 bg-purple-400/10 px-2 py-1 rounded border border-purple-400/20">PyTorch</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CUDA</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Docker</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Spark</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">GDAL</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 5: CNN Architectures from Scratch -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-green-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-green-400/5">
-                        <div class="h-36 bg-gradient-to-br from-green-500/10 via-green-500/5 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 left-4">
-                                <span class="text-[10px] uppercase tracking-wider font-bold text-green-400 bg-green-500/10 px-2.5 py-1 rounded-full border border-green-500/20">Aug – Dec 2022</span>
-                            </div>
-                            <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://github.com/MayeshMohapatra/CNNs-from-scratch" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-green-500 transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
-                            </div>
-                             <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://github.com/MayeshMohapatra/CNNs-from-scratch" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-primary transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <!-- Stacked conv layers SVG -->
-                                <svg class="w-10 h-10 text-green-500/30 group-hover:text-green-500/80 transition-all duration-500 transform group-hover:scale-110" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="8" y="6" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="26" y="6" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="8" y="19" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="26" y="19" width="14" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><rect x="14" y="33" width="20" height="10" rx="1.5" stroke="currentColor" stroke-width="1.5" fill="none"/><line x1="15" y1="29" x2="20" y2="33" stroke="currentColor" stroke-width="1" opacity="0.4"/><line x1="33" y1="29" x2="28" y2="33" stroke="currentColor" stroke-width="1" opacity="0.4"/><circle cx="24" cy="38" r="2" fill="currentColor" opacity="0.4"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-green-500/5 rounded-full blur-2xl group-hover:bg-green-500/10 transition-all duration-500"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-green-400 transition-colors">CNN Architectures from Scratch</h3>
-                            <ul class="space-y-2 mb-4">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-green-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Coded <span class="text-white">ResNet and VGG</span> variants from first principles in PyTorch without pre-trained weights, building deep intuition for residual connections and feature hierarchies.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-green-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Assessed convergence and generalization on <span class="text-white">CIFAR-10 and ImageNet</span> subsets with gradient-flow analysis and scripted benchmarks.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-green-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Diagnosed vanishing gradient issues in deep VGG, demonstrating ~<span class="text-white">2× faster convergence</span> with skip connections in ResNet counterparts.</span>
-                                </li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-green-400 bg-green-500/10 px-2 py-1 rounded border border-green-500/20">ResNet</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">VGG</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">PyTorch</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">NumPy</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Project 6: Chest X-Ray Classification -->
-                    <div class="group bg-surface border border-white/5 rounded-2xl overflow-hidden hover:border-red-400/30 transition-all duration-500 hover:-translate-y-2 hover:shadow-xl hover:shadow-red-400/5">
-                        <div class="h-36 bg-gradient-to-br from-red-500/10 via-red-500/5 to-transparent relative overflow-hidden">
-                            <div class="absolute top-4 left-4">
-                                <span class="text-[10px] uppercase tracking-wider font-bold text-red-400 bg-red-500/10 px-2.5 py-1 rounded-full border border-red-500/20">May 2021 – May 2022</span>
-                            </div>
-                            <div class="absolute top-4 right-4 flex gap-2">
-                                <a href="https://github.com/MayeshMohapatra/ChestXRayClassification" target="_blank" class="w-8 h-8 rounded-full bg-black/50 flex items-center justify-center text-white/70 hover:text-white hover:bg-red-500 transition-all active:scale-95"><i class="fab fa-github text-xs"></i></a>
-                            </div>
-                            <div class="absolute bottom-4 left-4">
-                                <!-- Chest X-ray / lungs SVG -->
-                                <svg class="w-10 h-10 text-red-500/30 group-hover:text-red-500/80 transition-all duration-500 transform group-hover:scale-110" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="6" y="4" width="36" height="40" rx="3" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M18 16C14 18 12 24 12 28C12 32 14 34 17 34C20 34 20 30 20 28L20 18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M30 16C34 18 36 24 36 28C36 32 34 34 31 34C28 34 28 30 28 28L28 18" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="24" y1="14" x2="24" y2="36" stroke="currentColor" stroke-width="1" opacity="0.3"/><circle cx="24" cy="14" r="2" fill="currentColor" opacity="0.4"/>
-                                </svg>
-                            </div>
-                            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-red-500/5 rounded-full blur-2xl group-hover:bg-red-500/10 transition-all duration-500"></div>
-                        </div>
-                        <div class="p-6">
-                            <h3 class="text-lg font-bold text-white mb-3 group-hover:text-red-400 transition-colors">Chest X-Ray Pathology Classification</h3>
-                            <ul class="space-y-2 mb-4">
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-red-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Fine-tuned <span class="text-white">DenseNet-121</span> on CheXpert, matching published AUC benchmarks for <span class="text-white">14 thoracic pathologies</span> in a multi-label classification setting.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-red-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Applied <span class="text-white">SMOTE</span> and <span class="text-white">focal loss</span> to address severe class imbalance, raising minority-class recall by <span class="text-white">8%</span>.</span>
-                                </li>
-                                <li class="text-textMuted text-sm leading-relaxed flex items-start">
-                                    <span class="text-red-400 mr-2 mt-0.5 text-xs shrink-0">▹</span>
-                                    <span>Built an end-to-end evaluation workflow with automated ROC/AUC computation and model versioning for reproducible experiments.</span>
-                                </li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 pt-2 border-t border-white/5">
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-red-400 bg-red-500/10 px-2 py-1 rounded border border-red-500/20">DenseNet</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">CheXpert</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Medical AI</span>
-                                <span class="text-[10px] uppercase tracking-wider font-semibold text-textMuted bg-white/5 px-2 py-1 rounded border border-white/5">Scikit-Learn</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </section>
-
-        <!-- Publications Section -->
-        <section id="publications" class="py-24">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-end mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Publications</h2>
-                    <div class="h-px bg-white/10 flex-grow ml-6 mb-2"></div>
-                </div>
-                
-                <div class="space-y-4">
-                    <a href="https://www.2025.ieeeigarss.org/view_paper.php?PaperNum=6077&SessionID=1068" class="block group">
-                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
-                            <div class="flex items-start justify-between">
-                                <h3 class="text-lg font-medium text-textMain group-hover:text-primary transition-colors">Comparative Analysis of Deep Learning Models for Cyclone Detection</h3>
-                                <i class="fas fa-arrow-right text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all"></i>
-                            </div>
-                            <div class="mt-2 text-sm text-textMuted italic group-hover:text-white/80 transition-colors">IEEE International Geosciences and Remote Sensing Symposium (IGARSS) 2025</div>
-                        </div>
-                    </a>
-
-                    <a href="https://arxiv.org/abs/2410.08218" class="block group">
-                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
-                            <div class="flex items-start justify-between">
-                                <h3 class="text-lg font-medium text-textMain group-hover:text-primary transition-colors">A Visual-Analytical Approach for Automatic Detection of Cyclonic Events in Satellite Observations</h3>
-                                <i class="fas fa-arrow-right text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all"></i>
-                            </div>
-                            <div class="mt-2 text-sm text-textMuted italic group-hover:text-white/80 transition-colors">40th Annual Symposium on Space Science and Technology, ISRO-IISC (2024)</div>
-                        </div>
-                    </a>
-
-                    <a href="https://www.scirp.org/journal/paperinformation?paperid=129379" class="block group">
-                        <div class="p-6 rounded-2xl bg-surface/30 border border-white/5 hover:bg-surfaceHighlight/50 hover:border-white/10 transition-all duration-300">
-                            <div class="flex items-start justify-between">
-                                <h3 class="text-lg font-medium text-textMain group-hover:text-primary transition-colors">Generative Adversarial Network Based Approach towards Synthetically Generating Insider Threat Scenarios</h3>
-                                <i class="fas fa-arrow-right text-white/20 group-hover:text-primary group-hover:translate-x-1 transition-all"></i>
-                            </div>
-                            <div class="mt-2 text-sm text-textMuted italic group-hover:text-white/80 transition-colors">Journal of Software Engineering and Applications (2023)</div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="py-24 bg-surface/20">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex items-end mb-16">
-                    <h2 class="text-3xl md:text-4xl font-bold text-white">Technical Skills</h2>
-                    <div class="h-px bg-white/10 flex-grow ml-6 mb-2"></div>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                    <div>
-                        <h3 class="text-sm uppercase tracking-widest text-textMuted font-bold mb-6">Languages & Frameworks</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">Python</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">C/C++</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">SQL</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">R</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">PyTorch</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">TensorFlow</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">Scikit-Learn</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-primary hover:text-primary hover:bg-white/5 transition-all cursor-default duration-300">NumPy/Pandas</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-sm uppercase tracking-widest text-textMuted font-bold mb-6">Perception & Computer Vision</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">3D Reconstruction</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">4D Gaussian Splatting</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">Pose Estimation</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">Object Detection</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">Segmentation</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">SMPL/SMPLx</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-purple-400 hover:text-purple-400 hover:bg-white/5 transition-all cursor-default duration-300">DINOv2</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-sm uppercase tracking-widest text-textMuted font-bold mb-6">Tools & Infrastructure</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">CUDA</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Docker</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">AWS</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Spark/Dask</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Weights & Biases</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">COLMAP</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">GDAL/Rasterio</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-accent hover:text-accent hover:bg-white/5 transition-all cursor-default duration-300">Git</span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <h3 class="text-sm uppercase tracking-widest text-textMuted font-bold mb-6">Evaluation & Methods</h3>
-                        <div class="flex flex-wrap gap-3">
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-green-400 hover:text-green-400 hover:bg-white/5 transition-all cursor-default duration-300">PSNR / SSIM / LPIPS</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-green-400 hover:text-green-400 hover:bg-white/5 transition-all cursor-default duration-300">mAP / RMSE</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-green-400 hover:text-green-400 hover:bg-white/5 transition-all cursor-default duration-300">AUC-ROC</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-green-400 hover:text-green-400 hover:bg-white/5 transition-all cursor-default duration-300">Model Pruning & Quantization</span>
-                            <span class="px-4 py-2 bg-surface border border-white/10 rounded-lg text-sm text-textMain hover:border-green-400 hover:text-green-400 hover:bg-white/5 transition-all cursor-default duration-300">Ablation Study Design</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Contact Section -->
-        <section id="contact" class="py-24 border-t border-white/5">
-            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-                <h2 class="text-3xl font-bold mb-6 text-white">Let's Build Something</h2>
-                <p class="text-textMuted text-lg mb-10 max-w-xl mx-auto">
-                    Based in College Station, TX. Actively seeking <strong class="text-white font-normal">Summer 2026 research internships</strong> and full-time opportunities in Computer Vision, 3D Reconstruction, and Applied ML. Let's talk.
-                </p>
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="mailto:mayesh@tamu.edu" class="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-bold rounded-full text-black bg-white hover:bg-gray-200 transition-all active:scale-95">
-                        <i class="far fa-envelope mr-2"></i> mayesh@tamu.edu
-                    </a>
-                    <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border border-white/10 text-base font-bold rounded-full text-white hover:bg-white/5 transition-all active:scale-95">
-                        <i class="fab fa-linkedin mr-2"></i> LinkedIn
-                    </a>
-                    <a href="Mohapatra_Mayesh.pdf" target="_blank" class="inline-flex items-center justify-center px-8 py-3 border border-primary text-base font-bold rounded-full text-primary hover:bg-primary/10 transition-all active:scale-95">
-                        <i class="fas fa-file-alt mr-2"></i> Full Resume (2-page)
-                    </a>
-                </div>
-                
-                <div class="mt-20 text-xs text-textMuted/50 font-light">
-                    &copy; 2026 Mayesh Mohapatra. 
-                </div>
-            </div>
-        </section>
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience" style="background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrapper">
+    <div class="section-header">
+      <h2>Experience</h2>
+      <div class="section-line"></div>
     </div>
 
-    <!-- Scripts -->
-    <script>
-        // --- TYPEWRITER EFFECT ---
-        
-        // 1. Name Typewriter (Types once)
-        const nameText = "Mayesh"; // Or "Mayesh Mohapatra"
-        const nameElement = document.getElementById('name-typewriter');
-        let nameIndex = 0;
+    <div class="timeline">
 
-        function typeName() {
-            if (nameIndex < nameText.length) {
-                nameElement.innerHTML += nameText.charAt(nameIndex);
-                nameIndex++;
-                setTimeout(typeName, 150); // Speed of typing
-            } else {
-                // Start typing roles after name finishes
-                setTimeout(typeRole, 500);
-            }
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Graduate Researcher — 3D Perception</div>
+              <div class="exp-org">Texas A&M University &nbsp;·&nbsp; Advisor: Prof. Cheng Zhang &nbsp;·&nbsp; College Station, TX</div>
+            </div>
+            <span class="exp-date">Aug 2025 – Present</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Built an end-to-end monocular 3D scene reconstruction pipeline for dynamic athlete reconstruction from single-view RGB video, integrating <strong>Human3R</strong> and <strong>VGGT</strong> for pose estimation with DeepLabv3 segmentation into a unified PyTorch tracking framework; validated on internal multi-athlete benchmarks.</li>
+            <li>Cut end-to-end inference latency by <strong>40%</strong> for real-time biomechanical feedback during live training sessions, using mixed-precision CUDA kernels and INT8 quantization across the full perception stack.</li>
+            <li>Built an analytics module that extracts biomechanical metrics (jump height, center-of-mass velocity, take-off angle) across 3+ athletic disciplines by fusing 3D pose outputs with physics-based motion analysis.</li>
+            <li>Delivered production perception APIs consumed by biomechanics researchers and coaching staff, with standardized data contracts linking 3D reconstruction outputs to a downstream decision-support system.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Project Associate — Multi-Modal Perception &amp; Satellite Image Analysis</div>
+              <div class="exp-org">Indian Institute of Science (IISc) &amp; ISRO Space Applications Centre &nbsp;·&nbsp; Bengaluru, India</div>
+            </div>
+            <span class="exp-date">May 2023 – May 2025</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Boosted model training throughput by <strong>30%</strong> on 100+ GB/day of HDF5 multispectral satellite imagery by building an automated Python ingestion pipeline that generated roughly 14,000 annotated frames via GDAL and Rasterio.</li>
+            <li>Designed a two-stage cyclone detector (Center-Locator and Intensity-Estimator) in PyTorch with self-supervised pre-training on unlabeled satellite data, validated across 5+ spectral sensor bands using mAP and RMSE.</li>
+            <li>Reduced inference latency from 3–4 hours to under 1 second (<strong>10,000× speedup</strong>) for near-real-time cyclone monitoring, applying model pruning, INT8 quantization, and parallelized preprocessing.</li>
+            <li>Scaled training to 200+ tracked experiments with reproducible deployments using Weights &amp; Biases, Docker, and distributed Spark/Dask data workflows.</li>
+            <li>Published at <strong>IEEE IGARSS 2025</strong> (Brisbane) on deep-learning models for cyclone detection on infrared satellite imagery.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Research Intern (Remote) — Generative Models &amp; Anomaly Detection</div>
+              <div class="exp-org">Georgia Institute of Technology &nbsp;·&nbsp; Atlanta, GA</div>
+            </div>
+            <span class="exp-date">Jan 2023 – May 2023</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Improved out-of-distribution robustness by <strong>15%</strong> on insider-threat detection by synthesizing rare-class training data with GANs in PyTorch.</li>
+            <li>Achieved 95% classification accuracy and lifted rare-event recall by <strong>12%</strong>, training autoencoder-based anomaly detectors combined with a Random Forest and Logistic Regression ensemble.</li>
+            <li>Cut data preprocessing time by 25% across 5+ dataset splits by vectorizing cleaning workflows in Pandas and NumPy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="exp-card">
+          <div class="exp-header">
+            <div>
+              <div class="exp-title">Data Science Intern — ML Pipelines &amp; Analytics</div>
+              <div class="exp-org">Deloitte Haskins &amp; Sells LLP &nbsp;·&nbsp; Bengaluru, India</div>
+            </div>
+            <span class="exp-date">Jun 2022 – Mar 2023</span>
+          </div>
+          <ul class="exp-bullets">
+            <li>Saved 15 engineering hours/week and cut audit review time by <strong>40%</strong> by refactoring Spark ETL pipelines and overhauling journal-entry testing logic across distributed data clusters.</li>
+            <li>Deployed analytics dashboards adopted by 4+ audit teams (85% deployment rate) by building Power BI exception-analysis tools and automating reporting workflows.</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── EDUCATION ─── -->
+<section id="education">
+  <div class="wrapper">
+    <div class="section-header">
+      <h2>Education</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="edu-cards">
+
+      <div class="edu-card">
+        <div class="edu-school">Texas A&M University</div>
+        <div class="edu-degree">M.S. Computer Science &nbsp;·&nbsp; College Station, TX</div>
+        <div class="edu-meta">
+          <span class="edu-tag accent">GPA: 3.67 / 4.0</span>
+          <span class="edu-tag">Aug 2025 – May 2027</span>
+        </div>
+        <div class="edu-courses">
+          <span class="course-pill">Deep Learning</span>
+          <span class="course-pill">CV &amp; Robotic Perception</span>
+          <span class="course-pill">ML for 3D Vision &amp; Graphics</span>
+          <span class="course-pill">Deep Reinforcement Learning</span>
+          <span class="course-pill">Generative AI for CV</span>
+          <span class="course-pill">Advanced CV</span>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div class="edu-school">Bennett University</div>
+        <div class="edu-degree">B.Tech (Honors), Computer Science Engineering &nbsp;·&nbsp; Greater Noida, India</div>
+        <div class="edu-meta">
+          <span class="edu-tag">GPA: 3.54 / 4.0</span>
+          <span class="edu-tag">May 2023</span>
+        </div>
+        <div class="edu-courses">
+          <span class="course-pill">Machine Learning</span>
+          <span class="course-pill">Data Structures &amp; Algorithms</span>
+          <span class="course-pill">Linear Algebra</span>
+          <span class="course-pill">Probability &amp; Statistics</span>
+          <span class="course-pill">Database Systems</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects" style="background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrapper">
+    <div class="section-header">
+      <h2>Projects</h2>
+      <div class="section-line"></div>
+    </div>
+
+    <div class="projects-grid">
+
+      <!-- HDG — from resume, missing from website -->
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-date">Feb 2026 – Present</span>
+          <div class="project-links"></div>
+        </div>
+        <span class="project-status status-wip">Manuscript in Progress</span>
+        <div class="project-title">Hierarchically Decomposed Diffusion Guidance (HDG)</div>
+        <ul class="project-bullets">
+          <li>Co-developed <strong>HDG</strong>, a method decomposing classifier-free guidance into hierarchical components for fine-grained conditional diffusion generation, improving stability, sample quality, and controllability over standard CFG.</li>
+          <li>Built data pipelines aligning fine-grained class hierarchies with diffusion conditioning signals across multiple semantic taxonomies.</li>
+          <li>Implemented full evaluation suite measuring generation quality, controllability, and fine-grained alignment with ablation studies isolating each decomposition component vs standard CFG baselines.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag primary">Diffusion Models</span>
+          <span class="tech-tag">CFG</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">Flow Matching</span>
+        </div>
+      </div>
+
+      <!-- Pose4DGS -->
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-date">Jan – May 2026</span>
+          <div class="project-links"></div>
+        </div>
+        <span class="project-status status-done">Completed</span>
+        <div class="project-title">Pose4DGS: Pose-Conditioned 4D Gaussian Splatting</div>
+        <ul class="project-bullets">
+          <li>Improved unseen-pose generalization on monocular 4D Gaussian Splatting human avatars with two zero-overhead training modules: <strong>SMPL-based Pose-Space Augmentation</strong> and DINOv2 (ViT-B/14) feature supervision.</li>
+          <li>Designed a 3-tier novel-pose evaluation protocol (easy / moderate / extreme) on ZJU-MoCap and PeopleSnapshot; ran full 2×2 ablation grid; compressed DINOv2 embeddings 768→64 via PCA.</li>
+          <li>Led a 3-person team across rendering, deformation, and evaluation modules; tracked all ablations in W&amp;B; delivered a reproducible 6–8 page technical report.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag primary">4D Gaussian Splatting</span>
+          <span class="tech-tag">DINOv2</span>
+          <span class="tech-tag">SMPL</span>
+          <span class="tech-tag">CUDA</span>
+          <span class="tech-tag">W&amp;B</span>
+        </div>
+      </div>
+
+      <!-- 3D Human Reconstruction -->
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-date">Aug 2025 – Present</span>
+          <div class="project-links"></div>
+        </div>
+        <span class="project-status status-active">Active Research</span>
+        <div class="project-title">Monocular 3D Human Reconstruction</div>
+        <ul class="project-bullets">
+          <li>Building a neural rendering pipeline converting single-view RGB video into pose-driven 3D human meshes using neural implicit representations and SMPL priors, targeting sub-centimeter surface accuracy.</li>
+          <li>Benchmarked reconstruction quality against SOTA baselines on <strong>PSNR, SSIM, and LPIPS</strong> on ZJU-MoCap and Human3.6M by iterating on deformation-network architectures and loss functions.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag primary">NeRF</span>
+          <span class="tech-tag">Gaussian Splatting</span>
+          <span class="tech-tag">SMPL</span>
+          <span class="tech-tag">COLMAP</span>
+          <span class="tech-tag">PyTorch</span>
+        </div>
+      </div>
+
+      <!-- CycloAI -->
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-date">May 2023 – May 2025</span>
+          <div class="project-links">
+            <a href="https://www.vistalabiisc.com/research/cyc" target="_blank" class="project-link" title="Project Page"><i class="fas fa-external-link-alt"></i></a>
+          </div>
+        </div>
+        <span class="project-status status-done">IEEE IGARSS 2025</span>
+        <div class="project-title">CycloAI: Multi-Modal Cyclone Detection</div>
+        <ul class="project-bullets">
+          <li>Co-built end-to-end perception pipeline processing 100+ GB/day satellite streams with a two-stage detector (Center-Locator + Intensity-Estimator) with self-supervised pre-training; reduced inference from 3–4 hrs to <strong>&lt;1 sec</strong>.</li>
+          <li>Lifted minority-class recall by 12% across 5+ spectral bands using focal loss and SMOTE; tracked 200+ runs in W&amp;B inside Docker-containerized environments.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag primary">PyTorch</span>
+          <span class="tech-tag">GDAL</span>
+          <span class="tech-tag">Spark/Dask</span>
+          <span class="tech-tag">Docker</span>
+          <span class="tech-tag">CUDA</span>
+        </div>
+      </div>
+
+      <!-- RAM -->
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-date">Aug – Dec 2025</span>
+          <div class="project-links">
+            <a href="https://github.com/MayeshMohapatra/Recurrent-Attention-Model-for-Image-Classification" target="_blank" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <span class="project-status status-done">Completed</span>
+        <div class="project-title">Recurrent Attention Model (RAM)</div>
+        <ul class="project-bullets">
+          <li>Achieved <strong>96.64% MNIST accuracy</strong> using only 6 glimpses (~49% of pixels) by reproducing RAM in PyTorch with REINFORCE policy gradients; matching full-image CNN baselines at a fraction of the compute.</li>
+          <li>Stabilized policy-gradient training with a learned value baseline; ablated glimpse count, patch resolution, and reward shaping; released a reproducible open-source codebase.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag primary">REINFORCE</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">Attention</span>
+          <span class="tech-tag">NumPy</span>
+        </div>
+      </div>
+
+      <!-- CNN from scratch -->
+      <div class="project-card">
+        <div class="project-top">
+          <span class="project-date">Aug – Dec 2022</span>
+          <div class="project-links">
+            <a href="https://github.com/MayeshMohapatra/CNNs-from-scratch" target="_blank" class="project-link" title="GitHub"><i class="fab fa-github"></i></a>
+          </div>
+        </div>
+        <span class="project-status status-done">Completed</span>
+        <div class="project-title">CNN Architectures from Scratch</div>
+        <ul class="project-bullets">
+          <li>Implemented <strong>ResNet and VGG</strong> variants from first principles in PyTorch without pre-trained weights; assessed convergence on CIFAR-10 and ImageNet subsets with gradient-flow analysis.</li>
+          <li>Diagnosed vanishing gradient issues in deep VGG, demonstrating ~<strong>2× faster convergence</strong> with skip connections in ResNet counterparts.</li>
+        </ul>
+        <div class="tech-tags">
+          <span class="tech-tag primary">ResNet</span>
+          <span class="tech-tag">VGG</span>
+          <span class="tech-tag">PyTorch</span>
+          <span class="tech-tag">NumPy</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PUBLICATIONS ─── -->
+<section id="publications">
+  <div class="wrapper">
+    <div class="section-header">
+      <h2>Publications</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="pub-list">
+
+      <a href="https://www.2025.ieeeigarss.org/view_paper.php?PaperNum=6077&SessionID=1068" target="_blank" class="pub-card">
+        <div class="pub-num">01</div>
+        <div class="pub-content">
+          <div class="pub-title">Comparative Analysis of Deep Learning Models for Cyclone Detection and Localisation on Infrared Satellite Images</div>
+          <div class="pub-meta">
+            <span class="pub-venue">IEEE IGARSS 2025, Brisbane, Australia</span>
+            <span class="pub-badge">IEEE</span>
+          </div>
+        </div>
+        <div class="pub-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <a href="https://arxiv.org/abs/2410.08218" target="_blank" class="pub-card">
+        <div class="pub-num">02</div>
+        <div class="pub-content">
+          <div class="pub-title">A Self-Supervised Visual Analytical Approach for Automatic Detection of Cyclonic Events in Satellite Observations</div>
+          <div class="pub-meta">
+            <span class="pub-venue">40th Annual Symposium on Space Science and Technology, ISRO-IISc, 2024</span>
+            <span class="pub-badge">arXiv</span>
+          </div>
+        </div>
+        <div class="pub-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+      <a href="https://www.scirp.org/journal/paperinformation?paperid=129379" target="_blank" class="pub-card">
+        <div class="pub-num">03</div>
+        <div class="pub-content">
+          <div class="pub-title">GAN-Based Approach for Synthetically Generating Insider Threat Scenarios</div>
+          <div class="pub-meta">
+            <span class="pub-venue">Journal of Software Engineering and Applications, 16(11):586–604, 2023</span>
+            <span class="pub-badge">Journal</span>
+          </div>
+        </div>
+        <div class="pub-arrow"><i class="fas fa-arrow-right"></i></div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills" style="background: var(--bg-alt); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="wrapper">
+    <div class="section-header">
+      <h2>Skills</h2>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <h3>Programming</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Python</span>
+          <span class="skill-tag highlight">CUDA</span>
+          <span class="skill-tag">C++</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">R</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>ML Frameworks</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">PyTorch</span>
+          <span class="skill-tag">HuggingFace Diffusers / Transformers</span>
+          <span class="skill-tag">Scikit-Learn</span>
+          <span class="skill-tag">NumPy / Pandas</span>
+          <span class="skill-tag">Weights &amp; Biases</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Generative Models</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">Diffusion Transformers (DiT, FLUX.1, SD3)</span>
+          <span class="skill-tag">Flow Matching / Rectified Flow</span>
+          <span class="skill-tag">DDPM / DDIM</span>
+          <span class="skill-tag">Classifier-Free Guidance</span>
+          <span class="skill-tag">VAE</span>
+          <span class="skill-tag">Score-Based Models</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Computer Vision</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">3D Scene Reconstruction</span>
+          <span class="skill-tag highlight">Gaussian Splatting</span>
+          <span class="skill-tag">NeRF</span>
+          <span class="skill-tag">Multi-View Geometry</span>
+          <span class="skill-tag">Human Pose Estimation</span>
+          <span class="skill-tag">SMPL / SMPLx</span>
+          <span class="skill-tag">Semantic Segmentation</span>
+          <span class="skill-tag">Point Cloud Processing</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Vision Backbones</h3>
+        <div class="skill-tags">
+          <span class="skill-tag highlight">DINOv2 (ViT-B/14)</span>
+          <span class="skill-tag">Vision Transformers</span>
+          <span class="skill-tag">CLIP</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <h3>Systems &amp; Tools</h3>
+        <div class="skill-tags">
+          <span class="skill-tag">Docker</span>
+          <span class="skill-tag">COLMAP</span>
+          <span class="skill-tag">GDAL / Rasterio</span>
+          <span class="skill-tag">Spark / Dask</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">JupyterLab</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="wrapper">
+    <div class="contact-inner">
+      <h2>Let's Connect</h2>
+      <p>
+        Based in College Station, TX. Actively seeking <strong>research internships and full-time roles</strong> in Computer Vision, 3D Reconstruction, Neural Rendering, and Generative Models. Open to both academic labs and industry research teams.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:mayesh@tamu.edu" class="btn btn-primary">
+          <i class="far fa-envelope"></i> mayesh@tamu.edu
+        </a>
+        <a href="https://www.linkedin.com/in/mayesh-mohapatra/" target="_blank" class="btn btn-ghost">
+          <i class="fab fa-linkedin-in"></i> LinkedIn
+        </a>
+        <a href="Mohapatra_Mayesh.pdf" target="_blank" class="btn btn-ghost">
+          <i class="fas fa-file-alt"></i> Full Resume
+        </a>
+      </div>
+      <div class="footer-line">
+        <span>© 2026 Mayesh Mohapatra</span>
+        <span>College Station, TX</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// ─── TYPEWRITER ───
+const roles = [
+  "Generative Image Synthesis",
+  "Diffusion Transformers",
+  "Flow Matching",
+  "3D Human Reconstruction",
+  "Neural Rendering"
+];
+const el = document.getElementById('role-text');
+let ri = 0, ci = 0, deleting = false;
+function typeLoop() {
+  const cur = roles[ri];
+  if (deleting) {
+    el.textContent = cur.slice(0, ci - 1); ci--;
+    if (ci === 0) { deleting = false; ri = (ri + 1) % roles.length; setTimeout(typeLoop, 400); return; }
+    setTimeout(typeLoop, 45);
+  } else {
+    el.textContent = cur.slice(0, ci + 1); ci++;
+    if (ci === cur.length) { deleting = true; setTimeout(typeLoop, 2200); return; }
+    setTimeout(typeLoop, 90);
+  }
+}
+setTimeout(typeLoop, 600);
+
+// ─── SMOOTH SCROLL ───
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+
+// ─── NAV SHADOW ON SCROLL ───
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.style.boxShadow = window.scrollY > 20 ? '0 1px 12px rgba(0,0,0,0.06)' : 'none';
+});
+
+// ─── MOBILE MENU ───
+function toggleMobileMenu() {
+  let menu = document.getElementById('mobile-nav');
+  if (menu) { menu.remove(); return; }
+  menu = document.createElement('div');
+  menu.id = 'mobile-nav';
+  menu.style.cssText = `position:fixed;top:56px;left:0;right:0;z-index:99;background:var(--bg);border-bottom:1px solid var(--border);padding:8px 20px 16px;`;
+  const links = ['#experience','#education','#projects','#publications','#skills','#contact'];
+  const labels = ['Experience','Education','Projects','Publications','Skills','Contact'];
+  links.forEach((href, i) => {
+    const a = document.createElement('a');
+    a.href = href; a.textContent = labels[i];
+    a.style.cssText = 'display:block;padding:10px 0;font-size:0.9rem;color:var(--text-muted);text-decoration:none;border-bottom:1px solid var(--border);';
+    a.addEventListener('click', () => menu.remove());
+    menu.appendChild(a);
+  });
+  document.body.appendChild(menu);
+}
+
+// ─── BACKGROUND: gentle scrolling dot mesh ───
+// A faint latent grid that drifts and parallaxes as the page scrolls.
+(function() {
+  const canvas = document.getElementById('bg-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+  const SPACING = 46;
+  const ACCENT = '39,84,197';
+  let scrollY = 0, targetScroll = 0;
+
+  function resize() {
+    W = canvas.width = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  window.addEventListener('scroll', () => { targetScroll = window.scrollY; }, { passive: true });
+
+  let t = 0;
+  function draw() {
+    t += 0.004;
+    scrollY += (targetScroll - scrollY) * 0.08;
+    ctx.clearRect(0, 0, W, H);
+
+    const offset = (scrollY * 0.15) % SPACING;
+    const cols = Math.ceil(W / SPACING) + 2;
+    const rows = Math.ceil(H / SPACING) + 2;
+
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const baseX = c * SPACING;
+        const baseY = r * SPACING - offset;
+        const wave = Math.sin(baseX * 0.012 + t + r * 0.3) * 3
+                   + Math.cos(baseY * 0.012 + t * 0.8) * 3;
+        const x = baseX + wave;
+        const y = baseY + wave * 0.5;
+        const pulse = 0.5 + 0.5 * Math.sin(baseX * 0.02 + baseY * 0.02 + t * 1.5);
+        const alpha = 0.05 + pulse * 0.06;
+        ctx.beginPath();
+        ctx.arc(x, y, 1.1, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${ACCENT},${alpha})`;
+        ctx.fill();
+      }
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+// ─── HERO: noise → recognizable subject (image diffusion) ───
+// Particles begin as 2D static noise, then "denoise" into a recognizable
+// silhouette — cycling through a person, a bird, and a cat. Each subject is
+// drawn to an offscreen canvas and sampled for point targets, so the shapes
+// are always recognizable. Evokes diffusion-based image generation.
+(function() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const DPR = Math.min(window.devicePixelRatio || 1, 2);
+
+  const W = () => canvas.getBoundingClientRect().width;
+  const H = () => canvas.getBoundingClientRect().height;
+
+  function setupCanvas() {
+    const r = canvas.getBoundingClientRect();
+    canvas.width = r.width * DPR;
+    canvas.height = r.height * DPR;
+    ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  }
+  setupCanvas();
+
+  const N = 300;
+  const ACCENT = [39, 84, 197];
+  const GRAY = [150, 148, 140];
+
+  const SUBJECTS = [
+    {
+      name: 'a person',
+      draw: (c, s) => {
+        c.beginPath();
+        c.arc(50, 22, 11, 0, Math.PI * 2);
+        c.fill();
+        c.beginPath();
+        c.moveTo(39, 40);
+        c.quadraticCurveTo(50, 33, 61, 40);
+        c.lineTo(64, 74);
+        c.quadraticCurveTo(50, 80, 36, 74);
+        c.closePath();
+        c.fill();
+        c.beginPath();
+        c.moveTo(40, 42); c.lineTo(26, 64); c.lineTo(31, 67); c.lineTo(44, 48); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(60, 42); c.lineTo(74, 64); c.lineTo(69, 67); c.lineTo(56, 48); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(42, 73); c.lineTo(40, 96); c.lineTo(46, 96); c.lineTo(49, 74); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(58, 73); c.lineTo(60, 96); c.lineTo(54, 96); c.lineTo(51, 74); c.closePath(); c.fill();
+      }
+    },
+    {
+      name: 'a bird',
+      draw: (c, s) => {
+        c.beginPath();
+        c.ellipse(46, 56, 22, 13, -0.25, 0, Math.PI * 2);
+        c.fill();
+        c.beginPath();
+        c.arc(70, 40, 9, 0, Math.PI * 2);
+        c.fill();
+        c.beginPath();
+        c.moveTo(78, 38); c.lineTo(90, 36); c.lineTo(78, 44); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(40, 50);
+        c.quadraticCurveTo(20, 30, 14, 52);
+        c.quadraticCurveTo(30, 54, 44, 60);
+        c.closePath();
+        c.fill();
+        c.beginPath();
+        c.moveTo(30, 66); c.lineTo(26, 84); c.lineTo(32, 70); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(40, 66); c.lineTo(40, 86); c.lineTo(46, 70); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(24, 60); c.lineTo(6, 66); c.lineTo(24, 68); c.closePath(); c.fill();
+      }
+    },
+    {
+      name: 'a cat',
+      draw: (c, s) => {
+        c.beginPath();
+        c.arc(42, 40, 16, 0, Math.PI * 2);
+        c.fill();
+        c.beginPath();
+        c.moveTo(30, 30); c.lineTo(26, 12); c.lineTo(40, 26); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(54, 30); c.lineTo(58, 12); c.lineTo(44, 26); c.closePath(); c.fill();
+        c.beginPath();
+        c.moveTo(34, 52);
+        c.quadraticCurveTo(40, 92, 60, 90);
+        c.quadraticCurveTo(70, 89, 70, 78);
+        c.quadraticCurveTo(58, 80, 54, 54);
+        c.closePath();
+        c.fill();
+        c.beginPath();
+        c.moveTo(66, 80);
+        c.quadraticCurveTo(92, 76, 84, 52);
+        c.quadraticCurveTo(80, 64, 64, 70);
+        c.closePath();
+        c.fill();
+      }
+    }
+  ];
+
+  function sampleShape(subject) {
+    const S = 100;
+    const off = document.createElement('canvas');
+    off.width = S; off.height = S;
+    const octx = off.getContext('2d');
+    octx.fillStyle = '#000';
+    subject.draw(octx, S);
+    const data = octx.getImageData(0, 0, S, S).data;
+
+    const filled = [];
+    for (let y = 0; y < S; y++) {
+      for (let x = 0; x < S; x++) {
+        if (data[(y * S + x) * 4 + 3] > 128) filled.push([x, y]);
+      }
+    }
+    const pts = [];
+    if (filled.length === 0) return pts;
+    for (let i = 0; i < N; i++) {
+      const [px, py] = filled[Math.floor(Math.random() * filled.length)];
+      pts.push({ x: (px / S - 0.5) * 2, y: (py / S - 0.5) * 2 });
+    }
+    return pts;
+  }
+
+  const subjectTargets = SUBJECTS.map(sampleShape);
+
+  let particles = [];
+  function initParticles() {
+    particles = Array.from({ length: N }, () => ({
+      nx: (Math.random() * 2 - 1),
+      ny: (Math.random() * 2 - 1),
+      size: 1.3 + Math.random() * 1.2,
+      jPhase: Math.random() * Math.PI * 2,
+      jit: 0.5 + Math.random() * 0.8
+    }));
+  }
+  initParticles();
+
+  const T_NOISE = 55, T_FORM = 95, T_HOLD = 150, T_OUT = 70;
+  const CYCLE = T_NOISE + T_FORM + T_HOLD + T_OUT;
+  let frame = 0;
+  let subjectIdx = 0;
+
+  function ease(t) { return t < 0.5 ? 2*t*t : -1 + (4 - 2*t)*t; }
+  function lerp(a, b, t) { return a + (b - a) * t; }
+
+  let af;
+  function animate() {
+    af = requestAnimationFrame(animate);
+    const w = W(), h = H();
+    const cx = w / 2, cy = h / 2 - 6;
+    const scale = Math.min(w, h) * 0.42;
+    ctx.clearRect(0, 0, w, h);
+
+    frame++;
+    if (frame >= CYCLE) {
+      frame = 0;
+      subjectIdx = (subjectIdx + 1) % SUBJECTS.length;
+    }
+
+    let formP, structured, dissolveP = 0;
+    if (frame < T_NOISE) {
+      formP = 0; structured = 0;
+    } else if (frame < T_NOISE + T_FORM) {
+      formP = ease((frame - T_NOISE) / T_FORM);
+      structured = formP;
+    } else if (frame < T_NOISE + T_FORM + T_HOLD) {
+      formP = 1; structured = 1;
+    } else {
+      const op = (frame - T_NOISE - T_FORM - T_HOLD) / T_OUT;
+      formP = 1 - ease(op);
+      structured = formP;
+      dissolveP = op;
+    }
+
+    const tgt = subjectTargets[subjectIdx];
+
+    const rendered = particles.map((p, i) => {
+      const t = tgt[i] || { x: 0, y: 0 };
+      const formX = cx + t.x * scale;
+      const formY = cy + t.y * scale;
+      const noiseX = cx + p.nx * w * 0.44;
+      const noiseY = cy + p.ny * h * 0.42;
+      const jx = Math.sin(frame * 0.05 + p.jPhase) * p.jit * (1 - structured) * 16;
+      const jy = Math.cos(frame * 0.045 + p.jPhase) * p.jit * (1 - structured) * 16;
+      const x = lerp(noiseX + jx, formX, formP);
+      const y = lerp(noiseY + jy, formY, formP);
+      return { x, y, base: p, structured };
+    });
+
+    if (structured > 0.6) {
+      const edgeA = (structured - 0.6) / 0.4 * 0.12 * (1 - dissolveP);
+      ctx.strokeStyle = `rgba(${ACCENT[0]},${ACCENT[1]},${ACCENT[2]},${edgeA})`;
+      ctx.lineWidth = 0.5;
+      const thresh = Math.min(w, h) * 0.07;
+      for (let i = 0; i < rendered.length; i += 2) {
+        for (let j = i + 1; j < Math.min(i + 10, rendered.length); j++) {
+          const a = rendered[i], b = rendered[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const d = Math.sqrt(dx*dx + dy*dy);
+          if (d < thresh) {
+            ctx.globalAlpha = edgeA * (1 - d / thresh);
+            ctx.beginPath();
+            ctx.moveTo(a.x, a.y);
+            ctx.lineTo(b.x, b.y);
+            ctx.stroke();
+          }
         }
+      }
+      ctx.globalAlpha = 1;
+    }
 
-        // 2. Role Typewriter (Loops)
-        const roles = [
-            "3D Human Reconstruction",
-            "4D Gaussian Splatting",
-            "Pose Estimation & Tracking",
-            "Neural Rendering (NeRF/3DGS)",
-            "Satellite Image Understanding"
-        ];
-        const roleElement = document.getElementById('role-typewriter');
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        let typeSpeed = 100;
+    rendered.forEach(rp => {
+      const cleanness = rp.structured;
+      const cr = Math.round(lerp(GRAY[0], ACCENT[0], cleanness));
+      const cg = Math.round(lerp(GRAY[1], ACCENT[1], cleanness));
+      const cb = Math.round(lerp(GRAY[2], ACCENT[2], cleanness));
+      const a = (0.42 + cleanness * 0.5) * (1 - dissolveP * 0.5);
+      const size = rp.base.size * (0.8 + cleanness * 0.45);
+      ctx.beginPath();
+      ctx.arc(rp.x, rp.y, Math.max(0.7, size), 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${cr},${cg},${cb},${a})`;
+      ctx.fill();
+    });
 
-        function typeRole() {
-            const currentRole = roles[roleIndex];
-            
-            if (isDeleting) {
-                roleElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-                typeSpeed = 50; // Deleting speed
-            } else {
-                roleElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-                typeSpeed = 100; // Typing speed
-            }
+    let label;
+    if (frame < T_NOISE) label = 'sampling noise';
+    else if (frame < T_NOISE + T_FORM) label = 'denoising';
+    else if (frame < T_NOISE + T_FORM + T_HOLD) label = 'generated: ' + SUBJECTS[subjectIdx].name;
+    else label = 'resampling';
 
-            if (!isDeleting && charIndex === currentRole.length) {
-                isDeleting = true;
-                typeSpeed = 2000; // Pause at end
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                typeSpeed = 500; // Pause before new word
-            }
+    ctx.save();
+    ctx.font = "400 11px 'DM Sans', sans-serif";
+    ctx.fillStyle = 'rgba(107,104,96,0.6)';
+    ctx.textAlign = 'center';
+    ctx.fillText(label, cx, h - 6);
+    ctx.restore();
+  }
 
-            setTimeout(typeRole, typeSpeed);
-        }
+  let rt;
+  window.addEventListener('resize', () => {
+    clearTimeout(rt);
+    rt = setTimeout(() => {
+      cancelAnimationFrame(af);
+      setupCanvas();
+      animate();
+    }, 150);
+  });
 
-        // Start the effect
-        document.addEventListener('DOMContentLoaded', typeName);
+  animate();
+})();
+</script>
 
-
-        // --- INTERACTIVE GRID WAVES ---
-
-        const canvas = document.getElementById('canvas-container');
-        const ctx = canvas.getContext('2d');
-
-        // Mouse tracking
-        let mouse = { x: -1000, y: -1000 };
-        document.addEventListener('mousemove', (e) => {
-            mouse.x = e.clientX;
-            mouse.y = e.clientY;
-        });
-        document.addEventListener('mouseleave', () => {
-            mouse.x = -1000;
-            mouse.y = -1000;
-        });
-
-        // Grid config
-        const SPACING = 40;
-        const DOT_RADIUS = 1.2;
-        const MOUSE_RADIUS = 180;
-        const WAVE_AMPLITUDE = 12;
-        const WAVE_SPEED = 0.0015;
-        const COLOR_BASE = { r: 59, g: 130, b: 246 };   // primary blue
-        const COLOR_ACCENT = { r: 6, g: 182, b: 212 };   // accent cyan
-
-        let cols, rows, gridPoints;
-        let time = 0;
-
-        function initGrid() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            cols = Math.ceil(canvas.width / SPACING) + 2;
-            rows = Math.ceil(canvas.height / SPACING) + 2;
-            gridPoints = [];
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    gridPoints.push({
-                        baseX: c * SPACING,
-                        baseY: r * SPACING,
-                        x: c * SPACING,
-                        y: r * SPACING,
-                        col: c,
-                        row: r
-                    });
-                }
-            }
-        }
-
-        initGrid();
-        window.addEventListener('resize', initGrid);
-
-        function animateGrid() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            time += WAVE_SPEED;
-
-            for (let i = 0; i < gridPoints.length; i++) {
-                const pt = gridPoints[i];
-
-                // Ambient sine wave displacement
-                const waveX = Math.sin(pt.baseY * 0.02 + time * 2) * WAVE_AMPLITUDE * 0.3;
-                const waveY = Math.cos(pt.baseX * 0.015 + time * 1.5) * WAVE_AMPLITUDE;
-
-                // Mouse repulsion
-                const dx = pt.baseX - mouse.x;
-                const dy = pt.baseY - mouse.y;
-                const dist = Math.sqrt(dx * dx + dy * dy);
-                let pushX = 0, pushY = 0;
-                if (dist < MOUSE_RADIUS) {
-                    const force = (1 - dist / MOUSE_RADIUS);
-                    const angle = Math.atan2(dy, dx);
-                    pushX = Math.cos(angle) * force * 30;
-                    pushY = Math.sin(angle) * force * 30;
-                }
-
-                pt.x = pt.baseX + waveX + pushX;
-                pt.y = pt.baseY + waveY + pushY;
-            }
-
-            // Draw connections (horizontal + vertical lines between neighbors)
-            for (let i = 0; i < gridPoints.length; i++) {
-                const pt = gridPoints[i];
-                const c = pt.col;
-                const r = pt.row;
-
-                // Displacement magnitude drives opacity
-                const dispX = pt.x - pt.baseX;
-                const dispY = pt.y - pt.baseY;
-                const disp = Math.sqrt(dispX * dispX + dispY * dispY);
-                const intensity = Math.min(disp / 30, 1);
-
-                // Lerp color from base blue to accent cyan based on displacement
-                const cr = Math.round(COLOR_BASE.r + (COLOR_ACCENT.r - COLOR_BASE.r) * intensity);
-                const cg = Math.round(COLOR_BASE.g + (COLOR_ACCENT.g - COLOR_BASE.g) * intensity);
-                const cb = Math.round(COLOR_BASE.b + (COLOR_ACCENT.b - COLOR_BASE.b) * intensity);
-
-                const lineAlpha = 0.04 + intensity * 0.12;
-                const dotAlpha = 0.15 + intensity * 0.55;
-
-                // Draw line to right neighbor
-                if (c < cols - 1) {
-                    const right = gridPoints[r * cols + (c + 1)];
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(${cr},${cg},${cb},${lineAlpha})`;
-                    ctx.lineWidth = 0.5 + intensity * 0.5;
-                    ctx.moveTo(pt.x, pt.y);
-                    ctx.lineTo(right.x, right.y);
-                    ctx.stroke();
-                }
-
-                // Draw line to bottom neighbor
-                if (r < rows - 1) {
-                    const below = gridPoints[(r + 1) * cols + c];
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(${cr},${cg},${cb},${lineAlpha})`;
-                    ctx.lineWidth = 0.5 + intensity * 0.5;
-                    ctx.moveTo(pt.x, pt.y);
-                    ctx.lineTo(below.x, below.y);
-                    ctx.stroke();
-                }
-
-                // Draw dot
-                ctx.beginPath();
-                ctx.fillStyle = `rgba(${cr},${cg},${cb},${dotAlpha})`;
-                ctx.arc(pt.x, pt.y, DOT_RADIUS + intensity * 1.5, 0, Math.PI * 2);
-                ctx.fill();
-            }
-
-            requestAnimationFrame(animateGrid);
-        }
-        animateGrid();
-
-
-        // --- SMOOTH SCROLL ---
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href');
-                if (targetId === '#') return; // Ignore empty anchors
-
-                const targetElement = document.querySelector(targetId);
-                if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
-            });
-        });
-
-        // --- THREE.JS HERO ANIMATION ---
-        function initThreeJS() {
-            const container = document.getElementById('hero-3d-container');
-            if (!container) return;
-
-            // Cleanup previous scene if it exists (hot reload safety)
-            while(container.firstChild) {
-                container.removeChild(container.firstChild);
-            }
-
-            const scene = new THREE.Scene();
-            
-            // Camera setup
-            const camera = new THREE.PerspectiveCamera(75, container.clientWidth / container.clientHeight, 0.1, 1000);
-            camera.position.z = 4.5;
-
-            // Renderer setup
-            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            renderer.setPixelRatio(window.devicePixelRatio); // Sharper rendering on high DPI
-            container.appendChild(renderer.domElement);
-
-            // --- CREATE SPHERICAL POINT CLOUD (Data Globe) ---
-            const geometry = new THREE.SphereGeometry(2.2, 96, 96);
-            
-            // Store original positions for "breathing" or wave effects
-            geometry.setAttribute('initialPosition', geometry.attributes.position.clone());
-            
-            // Colors attribute
-            const count = geometry.attributes.position.count;
-            const colors = new Float32Array(count * 3);
-            geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
-
-            const material = new THREE.PointsMaterial({
-                size: 0.025, // Smaller, refined points
-                vertexColors: true,
-                transparent: true,
-                opacity: 0.9,
-                sizeAttenuation: true
-            });
-
-            const points = new THREE.Points(geometry, material);
-            scene.add(points);
-
-            // Animation variables
-            let time = 0;
-            
-            // Color Scheme: Violet to Cyan gradient
-            const colorBottom = new THREE.Color(0x8b5cf6); // Violet-500
-            const colorTop = new THREE.Color(0x06b6d4);    // Cyan-500
-            const colorHighlight = new THREE.Color(0xffffff); // White highlights
-
-            function animate3D() {
-                requestAnimationFrame(animate3D);
-                time += 0.005; // Steady time base
-
-                // Steady, automatic rotation (No mouse interaction)
-                points.rotation.y += 0.002;
-                points.rotation.x = Math.sin(time * 0.2) * 0.15; // Gentle, slow tilt
-
-                // Wave/Pulse Logic for "Reconstruction" feel
-                const positions = points.geometry.attributes.position;
-                const initialPositions = points.geometry.attributes.initialPosition;
-                const colors = points.geometry.attributes.color;
-
-                // Create a slow moving wave
-                const wavePhase = time * 2;
-
-                for (let i = 0; i < count; i++) {
-                    const px = initialPositions.getX(i);
-                    const py = initialPositions.getY(i);
-                    const pz = initialPositions.getZ(i);
-
-                    // 1. Color Gradient based on Y height
-                    const normalizedHeight = (py + 2.2) / 4.4;
-                    const mixedColor = colorBottom.clone().lerp(colorTop, normalizedHeight);
-                    
-                    // 2. Wave Distortion (Simulating data scan)
-                    const waveHeight = Math.sin(py * 2 + wavePhase) * 0.1;
-                    
-                    // Apply slight radial displacement based on wave
-                    const scale = 1 + waveHeight * 0.2;
-                    positions.setXYZ(i, px * scale, py, pz * scale);
-
-                    // 3. Highlight the wave crests (Scan line effect)
-                    if (waveHeight > 0.08) {
-                        mixedColor.lerp(colorHighlight, 0.6);
-                    }
-
-                    colors.setXYZ(i, mixedColor.r, mixedColor.g, mixedColor.b);
-                }
-
-                points.geometry.attributes.position.needsUpdate = true;
-                points.geometry.attributes.color.needsUpdate = true;
-
-                renderer.render(scene, camera);
-            }
-
-            animate3D();
-
-            // Handle Resize
-            window.addEventListener('resize', () => {
-                if (container) {
-                    camera.aspect = container.clientWidth / container.clientHeight;
-                    camera.updateProjectionMatrix();
-                    renderer.setSize(container.clientWidth, container.clientHeight);
-                }
-            });
-            
-            // Mouse move listener removed entirely
-        }
-
-        // Initialize Three.js after DOM load
-        document.addEventListener('DOMContentLoaded', initThreeJS);
-
-    </script>
 </body>
 </html>
